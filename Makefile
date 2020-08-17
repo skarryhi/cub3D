@@ -1,26 +1,30 @@
-LIBFT = ./libft/
-ADAPT = ./adaptation/
-OUT = ./output/
-
-SRC = ./libft/*.c ./libcub/*.c
-OBJ = *.o
-
-NAME = cubft.a
-HEADER = ./libcub/libcub.h ./libft/libft.h ./libft/get_next_line.h
-
+NAME = cub3d
+HEADERS = ./libcub/libcub.h
 CFLAGS = -Wall -Werror -Wextra
 
+SRC = ./libcub/read_map.c ./libcub/errors.c ./libcub/f_to_stuct.c\
+	./libcub/f_to_stuct2.c main.c
+
+OBJ = $(patsubst %.c,%.o,$(SRC))
+
 all: $(NAME)
+
 $(NAME): $(OBJ)
-	@ar rc $(NAME) $?
-	@ranlib $(NAME)
-%.o: %.c $(HEADER)
-	@gcc $(CFLAGS) -c $< -o $@
+	$(MAKE) -C libft all
+	$(MAKE) -C minilibx
+	gcc $(OBJ) ./libft/libft.a -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+
+%.o: %.c $(HEADERS)
+	$(CC) -Imlx -c $< -o $@
 
 clean:
-	@rm -f $(OBJ)
+	rm -f $(OBJ)
+	$(MAKE) -C libft clean
 
 fclean:	clean
-	@rm -f $(NAME)
+	$(MAKE) -C libft fclean
+	rm -f $(NAME)
 
-re:		clean all
+re:		fclean all
+
+.PHONY: all clean fclean re

@@ -15,6 +15,9 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
+
+# define BUFFER_SIZE 32
 
 typedef struct		s_list
 {
@@ -66,5 +69,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 t_list				*ft_lstnew(void *content);
+char				*ft_strtosup(char const *s, size_t len);
+int					get_next_line(int fd, char **line);
 
 #endif

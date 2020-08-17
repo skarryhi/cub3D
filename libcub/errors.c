@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skarry <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/05 18:53:59 by skarry            #+#    #+#             */
-/*   Updated: 2020/08/05 18:54:01 by skarry           ###   ########.fr       */
+/*   Created: 2020/08/16 14:29:56 by skarry            #+#    #+#             */
+/*   Updated: 2020/08/16 14:29:59 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libcub.h"
+#include "cub3d.h"
 
-int		ft_lstsplit(t_list *z_map, char ***map)
+void	ft_exit(char *s)
 {
-	int		size;
-	int		i;
+	perror(s);
+	exit(-1);
+}
 
-	size = ft_lstsize(z_map);
-	*map = (char**)malloc(sizeof(char*) * (size + 1));
-	map[0][size] = NULL;
-	i = 0;
-	while (size != i)
+void	check_errno()
+{
+	if (errno != 0)
 	{
-		(*map)[i] = z_map->content;
-		i++;
-		z_map = z_map->next;
+		perror("Program stopped");
+		exit(errno);
 	}
-	return (0);
 }
