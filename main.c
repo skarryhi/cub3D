@@ -19,7 +19,7 @@ int		main(int argc, char **argv)
 	int			i = 0;
 	data_cub	data;
 	void		*mlx;
-	void    *img;
+	pix			img;
 
 
 	errno = 0;
@@ -32,7 +32,8 @@ int		main(int argc, char **argv)
 	data_check(data);
 
 	mlx = mlx_init();
-	img = mlx_new_image(mlx, 1920, 1080);
+
+	all_paint(data, &img, mlx);
 
 
 	printf("R %d %d\n", data.r1, data.r2);
@@ -48,5 +49,7 @@ int		main(int argc, char **argv)
 		printf("MAP [%s]\n", data.map[i]);
 		i++;
 	}
+
+	mlx_loop(mlx);
 	return(0);
 }

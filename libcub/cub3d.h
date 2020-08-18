@@ -19,12 +19,29 @@
 # include <errno.h>
 # include <mlx.h>
 
+# define SCALE 30
+
+typedef struct  s_pix 
+{
+    void        *img;
+    char        *addr;
+    int         bits_per_pixel;
+    int         line_length;
+    int         endian;
+}				pix;
+
 typedef struct	s_colour
 {
 	int	r;
 	int	g;
 	int	b;
 }				colour;
+
+typedef struct	s_player
+{
+	float	x;
+	float	y;
+}				player;
 
 
 typedef struct	s_cub
@@ -39,6 +56,7 @@ typedef struct	s_cub
 	struct s_colour		f;
 	struct s_colour		c;
 	char			**map;
+	player			plr;
 }				data_cub;
 
 
@@ -55,7 +73,9 @@ int			map_type(char **s, int y, data_cub *data);
 int			cardinal_type(char *s, data_cub *data);
 void		data_init(data_cub *data);
 void 		check_ex_str(char **s, char *s2);
-void		check_valid_map(char **m);
+void		check_valid_map(data_cub *data);
 void		data_check(data_cub data);
+int			create_trgb(int t, int r, int g, int b);
+void    	all_paint(data_cub data, pix *img, void *mlx);
 
 #endif

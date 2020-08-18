@@ -145,6 +145,6 @@ int		map_type(char **s, int y, data_cub *data)
 		y++;
 		i++;
 	}
-	check_valid_map(data->map);
+	check_valid_map(&*data);
 	return (y);
 }

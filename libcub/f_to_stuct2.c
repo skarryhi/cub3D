@@ -63,17 +63,19 @@ void	check_all_sim(char **m, int y, int x)
 	}
 }
 
-void	check_one_plr(char **m, int y, int x)
+void	check_one_plr(data_cub *data, int y, int x)
 {
 	int	flag = 1;
 
-	while (m[y])
+	while (data->map[y])
 	{
-		while (m[y][x])
+		while (data->map[y][x])
 		{
-			if (m[y][x] == 'N' || m[y][x] == 'S'\
-				|| m[y][x] == 'E' || m[y][x] == 'W')
+			if (data->map[y][x] == 'N' || data->map[y][x] == 'S'\
+				|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
 			{
+				data->plr.x = x;
+				data->plr.y = y;
 				if (flag)
 					flag--;
 				else
@@ -135,13 +137,13 @@ void	check_all_null(char **m, int y, int x)
 	check_by_x(m, y, 1);
 }
 
-void	check_valid_map(char **m)
+void	check_valid_map(data_cub *data)
 {
-	check_all_sim(m, 0, 0);
-	check_one_plr(m, 0, 0);
-	check_by_y(m, 0, 0);
-	check_by_x(m, 0, 0);
-	check_all_null(m, 1, 1);
+	check_all_sim(data->map, 0, 0);
+	check_one_plr(&*data, 0, 0);
+	check_by_y(data->map, 0, 0);
+	check_by_x(data->map, 0, 0);
+	check_all_null(data->map, 1, 1);
 }
 
 void 		check_ex_str(char **s, char *s2)
