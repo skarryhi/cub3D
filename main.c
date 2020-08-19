@@ -18,8 +18,7 @@ int		main(int argc, char **argv)
 	t_list		*z_map;
 	int			i = 0;
 	data_cub	data;
-	void		*mlx;
-	pix			img;
+	
 
 
 	errno = 0;
@@ -31,9 +30,9 @@ int		main(int argc, char **argv)
 	map_mas_to_stuct(map, &data, 0);
 	data_check(data);
 
-	mlx = mlx_init();
+	data.mlx = mlx_init();
 
-	all_paint(data, &img, mlx);
+	all_paint(&data, &data.img, data.mlx);
 
 
 	printf("R %d %d\n", data.r1, data.r2);
@@ -49,7 +48,7 @@ int		main(int argc, char **argv)
 		printf("MAP [%s]\n", data.map[i]);
 		i++;
 	}
-
-	mlx_loop(mlx);
+	mlx_hook(data.win, 2, 0, ft_key, &data);
+	mlx_loop(data.mlx);
 	return(0);
 }
