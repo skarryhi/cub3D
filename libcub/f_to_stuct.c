@@ -17,7 +17,10 @@ int		check_empty_s(char *s)
 	while (*s)
 	{
 		if (*s != '\n')
+		{
+			free(s);
 			return (1);
+		}
 		s++;
 	}
 	return (0);

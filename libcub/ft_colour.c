@@ -41,6 +41,22 @@ void			put_sq2(int i, pix *img, int x, int y)
 		y2--;
 	}
 }
+void			put_plr(int i, pix *img, int x, int y)
+{
+	int x2 = SCALE / 2;
+	int	y2 = SCALE / 2;
+
+	while (y2)
+	{
+		while (x2)
+		{
+			my_mlx_pixel_put(&*img, (10 + (x * SCALE) + x2), (10 + (y * SCALE) + y2), i);
+			x2--;
+		}
+		x2 = SCALE / 2;
+		y2--;
+	}
+}
 
 void			put_sq1(data_cub data, pix *img, int x, int y)
 {
@@ -61,7 +77,7 @@ void			put_sq1(data_cub data, pix *img, int x, int y)
 		x = 0;
 		y++;
 	}
-	put_sq2(create_trgb(0, 139, 0, 0), &*img, data.plr.x, data.plr.y);
+	put_plr(create_trgb(0, 139, 0, 0), &*img, data.plr.x, data.plr.y);
 }
 
 void				put_floor_ceiling(data_cub *data, int x, int y)

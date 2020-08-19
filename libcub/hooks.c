@@ -11,7 +11,7 @@ int             ft_key(int keycode, data_cub *data)
 	//A
 	if (keycode == 0)
 	{
-		if (data->map[(int)data->plr.y][(int)(data->plr.x - 1)] != '1')
+		// if (data->map[(int)data->plr.y][(int)(data->plr.x - 1)] != '1')
 			data->plr.x -= 1;
 		
 		put_map(&*data, &data->img);
@@ -19,21 +19,21 @@ int             ft_key(int keycode, data_cub *data)
 	//d
 	if (keycode == 2)
 	{
-		if (data->map[(int)data->plr.y][(int)(data->plr.x + 1)] != '1')
+		// if (data->map[(int)data->plr.y][(int)(data->plr.x + 1)] != '1')
 		data->plr.x += 1;
 		put_map(&*data, &data->img);
 	}
 	//w
 	if (keycode == 13)
 	{
-		if (data->map[(int)data->plr.y - 1][(int)(data->plr.x)] != '1')
+		// if (data->map[(int)data->plr.y - 1][(int)(data->plr.x)] != '1')
 		data->plr.y -= 1;
 		put_map(&*data, &data->img);
 	}
 	//s
 	if (keycode == 1)
 	{
-		if (data->map[(int)data->plr.y + 1][(int)(data->plr.x)] != '1')
+		// if (data->map[(int)data->plr.y + 1][(int)(data->plr.x)] != '1')
 		data->plr.y += 1;
 		put_map(&*data, &data->img);
 	}

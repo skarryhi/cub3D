@@ -41,6 +41,8 @@ typedef struct	s_player
 {
 	float	x;
 	float	y;
+	float	mx;
+	float	my;
 	char	c;
 }				player;
 
@@ -81,7 +83,7 @@ void		check_valid_map(data_cub *data);
 void		data_check(data_cub data);
 int			create_trgb(int t, int r, int g, int b);
 int         ft_key(int keycode, data_cub *data);
-void				put_map(data_cub *data, pix *img);
-void			all_paint(data_cub *data, pix *img, void *mlx);
+void		put_map(data_cub *data, pix *img);
+void		all_paint(data_cub *data, pix *img, void *mlx);
 
 #endif
