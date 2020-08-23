@@ -41,7 +41,7 @@ void			put_sq2(int i, pix *img, int x, int y)
 		y2--;
 	}
 }
-void			put_plr(int i, pix *img, int x, int y)
+void			put_plr(int i, pix *img, float x, float y)
 {
 	int x2 = SCALE / 2;
 	int	y2 = SCALE / 2;
