@@ -63,6 +63,30 @@ void	check_all_sim(char **m, int y, int x)
 	}
 }
 
+void	dir_plr(data_cub *data, char c)
+{
+	if (c == 'N')
+	{
+		data->plr.dirx = 0;
+		data->plr.diry = -1;
+	}
+	if (c == 'S')
+	{
+		data->plr.dirx = 0;
+		data->plr.diry = 1;
+	}
+	if (c == 'E')
+	{
+		data->plr.dirx = 1;
+		data->plr.diry = 0;
+	}
+	if (c == 'W')
+	{
+		data->plr.dirx = -1;
+		data->plr.diry = 0;
+	}
+}
+
 void	check_one_plr(data_cub *data, int y, int x)
 {
 	int	flag = 1;
@@ -76,6 +100,7 @@ void	check_one_plr(data_cub *data, int y, int x)
 			{
 				data->plr.x = x;
 				data->plr.y = y;
+				dir_plr(&*data, data->map[y][x]);
 				if (flag)
 					flag--;
 				else
@@ -141,8 +166,8 @@ void	check_valid_map(data_cub *data)
 {
 	check_all_sim(data->map, 0, 0);
 	check_one_plr(&*data, 0, 0);
-	check_by_y(data->map, 0, 0);
-	check_by_x(data->map, 0, 0);
+	data->plr.my = check_by_y(data->map, 0, 0);
+	data->plr.mx = check_by_x(data->map, 0, 0);
 	check_all_null(data->map, 1, 1);
 }
 
