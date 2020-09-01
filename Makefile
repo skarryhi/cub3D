@@ -3,7 +3,8 @@ HEADERS = ./libcub/libcub.h
 CFLAGS = -Wall -Werror -Wextra
 
 SRC = ./libcub/read_map.c ./libcub/errors.c ./libcub/f_to_stuct.c\
-	./libcub/f_to_stuct2.c ./libcub/ft_colour.c ./libcub/hooks.c main.c
+	./libcub/f_to_stuct2.c ./libcub/ft_colour.c ./libcub/hooks.c \
+	./libcub/raycast.c main.c
 
 OBJ = $(patsubst %.c,%.o,$(SRC))
 

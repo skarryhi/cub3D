@@ -66,25 +66,13 @@ void	check_all_sim(char **m, int y, int x)
 void	dir_plr(data_cub *data, char c)
 {
 	if (c == 'N')
-	{
-		data->plr.dirx = 0;
-		data->plr.diry = -1;
-	}
+		data->plr.dirx = M_PI + M_PI / 2;
 	if (c == 'S')
-	{
-		data->plr.dirx = 0;
-		data->plr.diry = 1;
-	}
+		data->plr.dirx = M_PI / 2;
 	if (c == 'E')
-	{
-		data->plr.dirx = 1;
-		data->plr.diry = 0;
-	}
+		data->plr.dirx = 0;
 	if (c == 'W')
-	{
-		data->plr.dirx = -1;
-		data->plr.diry = 0;
-	}
+		data->plr.dirx = M_PI;
 }
 
 void	check_one_plr(data_cub *data, int y, int x)

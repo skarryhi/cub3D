@@ -10,35 +10,55 @@ int             ft_key(int keycode, data_cub *data)
 		mlx_destroy_window(data->mlx, data->win);
 		exit(0);
 	}
-	//A
-	if (keycode == 0)
+	if (keycode == 123)
 	{
-		if (data->map[(int)data->plr.y][(int)(data->plr.x - step)] != '1')
-			data->plr.x -= step;
-		
+		data->plr.x = data->plr.x + step * cos(data->plr.dirx - M_PI / 2);
+		data->plr.y = data->plr.y + step * sin(data->plr.dirx - M_PI / 2);
+		if (data->map[(int)data->plr.y][(int)data->plr.x] == '1')
+		{
+			data->plr.x = data->plr.x - step * cos(data->plr.dirx - M_PI / 2);
+			data->plr.y = data->plr.y - step * sin(data->plr.dirx - M_PI / 2);
+		}
 		put_map(&*data, &data->img);
 	}
-	//d
-	if (keycode == 2)
+	if (keycode == 124)
 	{
-		if (data->map[(int)data->plr.y][(int)(data->plr.x + step)] != '1')
-		data->plr.x += step;
+		data->plr.x = data->plr.x + step * cos(data->plr.dirx + M_PI / 2);
+		data->plr.y = data->plr.y + step * sin(data->plr.dirx + M_PI / 2);
+		if (data->map[(int)data->plr.y][(int)data->plr.x] == '1')
+		{
+			data->plr.x = data->plr.x - step * cos(data->plr.dirx + M_PI / 2);
+			data->plr.y = data->plr.y - step * sin(data->plr.dirx + M_PI / 2);
+		}
 		put_map(&*data, &data->img);
 	}
-	//w
 	if (keycode == 13)
 	{
-		if (data->map[(int)(data->plr.y - step)][(int)(data->plr.x)] != '1')
-		data->plr.y -= step;
+		data->plr.x = data->plr.x + step * cos(data->plr.dirx);
+		data->plr.y = data->plr.y + step * sin(data->plr.dirx);
+		if (data->map[(int)data->plr.y][(int)data->plr.x] == '1')
+		{
+			data->plr.x = data->plr.x - step * cos(data->plr.dirx);
+			data->plr.y = data->plr.y - step * sin(data->plr.dirx);
+		}
 		put_map(&*data, &data->img);
 	}
-	//s
 	if (keycode == 1)
 	{
-		if (data->map[(int)(data->plr.y + step)][(int)(data->plr.x)] != '1')
-		data->plr.y += step;
+		data->plr.x = data->plr.x - step * cos(data->plr.dirx);
+		data->plr.y = data->plr.y - step * sin(data->plr.dirx);
+		if (data->map[(int)data->plr.y][(int)data->plr.x] == '1')
+		{
+			data->plr.x = data->plr.x + step * cos(data->plr.dirx);
+			data->plr.y = data->plr.y + step * sin(data->plr.dirx);
+		}
 		put_map(&*data, &data->img);
 	}
+	if (keycode == 2)
+		data->plr.dirx += M_PI / 16;
+	if (keycode == 0)
+		data->plr.dirx -= M_PI / 16;
+	put_map(&*data, &data->img);
 	printf("%d\n", keycode);
 	return (0);
 }

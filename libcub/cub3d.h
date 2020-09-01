@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <mlx.h>
+#include <math.h>
 
 # define SCALE 10
 
@@ -86,5 +87,7 @@ int			create_trgb(int t, int r, int g, int b);
 int         ft_key(int keycode, data_cub *data);
 void		put_map(data_cub *data, pix *img);
 void		all_paint(data_cub *data, pix *img, void *mlx);
+void		put_ray(data_cub *data, float x, float y);
+void        my_mlx_pixel_put(pix *data, int x, int y, int color);
 
 #endif
