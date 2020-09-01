@@ -68,10 +68,10 @@ void			put_sq1(data_cub data, pix *img, int x, int y)
 				put_sq2(create_trgb(0, 0, 20, 0), &*img, x, y);
 			if (data.map[y][x] == '2')
 				put_sq2(create_trgb(0, 0, 100, 0), &*img, x, y);	
-			if (data.map[y][x] == '0' || data.map[y][x] == 'N' ||\
-				data.map[y][x] == 'S' || data.map[y][x] == 'W' ||\
-				data.map[y][x] == 'E')
-				put_sq2(create_trgb(0, 240, 255, 255), &*img, x, y);
+			// if (data.map[y][x] == '0' || data.map[y][x] == 'N' ||\
+			// 	data.map[y][x] == 'S' || data.map[y][x] == 'W' ||\
+			// 	data.map[y][x] == 'E')
+			// 	put_sq2(create_trgb(0, 240, 255, 255), &*img, x, y);
 			x++;
 		}
 		x = 0;
@@ -106,8 +106,8 @@ void				put_floor_ceiling(data_cub *data, int x, int y)
 void				put_map(data_cub *data, pix *img)
 {
 	put_floor_ceiling(&*data, 0, 0);
-	put_sq1(*data, &*img, 0, 0);
 	put_ray(&*data, 0, 0);
+	put_sq1(*data, &*img, 0, 0);
 	put_plr(create_trgb(0, 139, 0, 0), &*img, data->plr.x, data->plr.y);
 	mlx_put_image_to_window(data->mlx, data->win, img->img, 0, 0);
 }
