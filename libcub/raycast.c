@@ -12,16 +12,58 @@
 
 #include "cub3d.h"
 
-void		put_wall(data_cub *data, int i, int c)
+int			trgb_wall(data_cub data, float a)
+{
+	int	o;
+
+	if (a < 0)
+		a -= M_PI;
+	a = fabs(a);
+	o = 0;
+	while (a > 2 * M_PI)
+		a -= 2 * M_PI;
+	if (a < M_PI_2)
+	{
+		if (data.map[data.plr.my][data.plr.mx - 1] == '0')
+			o = create_trgb(0, 0, 128, 128);//blue
+		else
+			o = create_trgb(0, 255, 215, 0);//gold
+	}
+	if (a > M_PI_2 && a < M_PI)
+	{
+		if (data.map[data.plr.my][data.plr.mx + 1] == '0')
+			o = create_trgb(0, 255, 140, 0);//orange
+		else
+			o = create_trgb(0, 255, 215, 0);//gold
+	}
+	if (a > M_PI && a < 3 * M_PI / 2)
+	{
+		if (data.map[data.plr.my][data.plr.mx + 1] == '0')
+			o = create_trgb(0, 255, 140, 0);//orange
+		else
+			o = create_trgb(0, 238, 130, 238);//pink
+	}
+	if (a > 3 * M_PI_2)
+	{
+		if (data.map[data.plr.my][data.plr.mx - 1] == '0')
+			o = create_trgb(0, 0, 128, 128);//blue
+		else
+			o = create_trgb(0, 238, 130, 238);//pink
+	}
+	return (o);
+}
+
+void		put_wall(data_cub *data, int i, float c, float a)
 {
 	int o;
-	int l;
+	float l;
 	int y;
 
-	o = create_trgb(0, 255, 140, 0);
-	if (c == 0)
-		c = 1;
-	l = (data->r2) / c;
+	o = trgb_wall(*data, a);
+	if ((c * cos(a - data->plr.dirx)) < 1)
+		l = (data->r2);
+	else
+		l = (data->r2) / (c * cos(a - data->plr.dirx));
 	y = (data->r2 / 2) + (l / 2);
 	while (l > 0)
 	{
@@ -43,20 +85,20 @@ void		put_ray(data_cub *data, float x, float y)
 	i = 0;
 	while(i <= data->r1)
 	{
-		// a = data->plr.dirx-M_PI/6 + M_PI/3*i/(float)(data->r2/2);
-		while (c < 20) 
+		while (c < 1000) 
 		{
 			x = data->plr.x + c * cos(a);
 			y = data->plr.y + c * sin(a);
-			if (data->map[(int)y][(int)x] == '1')
+			if (data->map[(int)y][(int)x] == '1' || data->map[(int)y][(int)x] == ' ')
 			{
-				put_wall(&*data, i, c);
+				data->plr.mx = (int)x;
+				data->plr.my = (int)y;
+				put_wall(&*data, i, c, a);
 				break;
 			}
 			x = SCALE * x + 11;
 			y = SCALE * y + 11;
 			my_mlx_pixel_put(&data->img, x, y, o);
-			
 			c += 0.01;
 		}
 		c = 0;

@@ -43,7 +43,6 @@ typedef struct	s_player
 	float	x;
 	float	y;
 	float	dirx;
-	float	diry;
 	int	mx;
 	int	my;
 }				player;
