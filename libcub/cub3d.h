@@ -29,6 +29,8 @@ typedef struct  s_pix
 	int         bits_per_pixel;
 	int         line_length;
 	int         endian;
+	int     	img_width;
+    int    		img_height;
 }				pix;
 
 typedef struct	s_colour

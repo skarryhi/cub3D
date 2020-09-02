@@ -112,6 +112,7 @@ void			all_paint(data_cub *data, pix *img, void *mlx)
 {
 	data->win = mlx_new_window(mlx, data->r1, data->r2, "cub3D");
 	img->img = mlx_new_image(mlx, data->r1, data->r2);
+	// img = mlx_xpm_file_to_image(mlx, data->ea, &data->img.img_width, &data->img.img_height);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length,
 								 &img->endian);
 	put_map(&*data, &*img);
