@@ -19,36 +19,47 @@ int			trgb_wall(data_cub data, float a)
 	if (a < 0)
 		a -= M_PI;
 	a = fabs(a);
-	o = 0;
+	o = create_trgb(0, 128, 128, 128);
 	while (a > 2 * M_PI)
 		a -= 2 * M_PI;
-	if (a < M_PI_2)
+
+	if (data.map[(int)data.plr.my][(int)(data.plr.mx - 0.02)] == '0' &&\
+		data.map[(int)data.plr.my][(int)(data.plr.mx + 0.02)] == '1' &&\
+		data.map[(int)(data.plr.my - 0.02)][(int)data.plr.mx] == '1' &&\
+		data.map[(int)(data.plr.my + 0.02)][(int)data.plr.mx] == '1')
+		o = create_trgb(0, 0, 128, 128);//blue
+	else if (data.map[(int)data.plr.my][(int)(data.plr.mx - 0.02)] == '1' &&\
+		data.map[(int)data.plr.my][(int)(data.plr.mx + 0.02)] == '1' &&\
+		data.map[(int)(data.plr.my - 0.02)][(int)data.plr.mx] == '0' &&\
+		data.map[(int)(data.plr.my + 0.02)][(int)data.plr.mx] == '1')
+		o = create_trgb(0, 255, 215, 0);//gold
+	else if (data.map[(int)data.plr.my][(int)(data.plr.mx - 0.02)] == '1' &&\
+		data.map[(int)data.plr.my][(int)(data.plr.mx + 0.02)] == '0' &&\
+		data.map[(int)(data.plr.my - 0.02)][(int)data.plr.mx] == '1' &&\
+		data.map[(int)(data.plr.my + 0.02)][(int)data.plr.mx] == '1')
+		o = create_trgb(0, 255, 140, 0);//orange
+	else if (data.map[(int)data.plr.my][(int)(data.plr.mx - 0.02)] == '1' &&\
+		data.map[(int)data.plr.my][(int)(data.plr.mx + 0.02)] == '1' &&\
+		data.map[(int)(data.plr.my - 0.02)][(int)data.plr.mx] == '1' &&\
+		data.map[(int)(data.plr.my + 0.02)][(int)data.plr.mx] == '0')
+		o = create_trgb(0, 238, 130, 238);//pink
+
+
+	else if (a < M_PI_2)
 	{
-		if (data.map[data.plr.my][data.plr.mx - 1] == '0')
-			o = create_trgb(0, 0, 128, 128);//blue
-		else
-			o = create_trgb(0, 255, 215, 0);//gold
+		o = create_trgb(0, 0, 128, 128);//blue
 	}
-	if (a > M_PI_2 && a < M_PI)
+	else if (a > M_PI_2 && a < M_PI)
 	{
-		if (data.map[data.plr.my][data.plr.mx + 1] == '0')
-			o = create_trgb(0, 255, 140, 0);//orange
-		else
-			o = create_trgb(0, 255, 215, 0);//gold
+		o = create_trgb(0, 255, 140, 0);//orange
 	}
-	if (a > M_PI && a < 3 * M_PI / 2)
+	else if (a > M_PI && a < 3 * M_PI / 2)
 	{
-		if (data.map[data.plr.my][data.plr.mx + 1] == '0')
-			o = create_trgb(0, 255, 140, 0);//orange
-		else
-			o = create_trgb(0, 238, 130, 238);//pink
+		o = create_trgb(0, 255, 140, 0);//orange
 	}
-	if (a > 3 * M_PI_2)
+	else if (a > 3 * M_PI_2)
 	{
-		if (data.map[data.plr.my][data.plr.mx - 1] == '0')
-			o = create_trgb(0, 0, 128, 128);//blue
-		else
-			o = create_trgb(0, 238, 130, 238);//pink
+		o = create_trgb(0, 0, 128, 128);//blue
 	}
 	return (o);
 }
@@ -91,8 +102,8 @@ void		put_ray(data_cub *data, float x, float y)
 			y = data->plr.y + c * sin(a);
 			if (data->map[(int)y][(int)x] == '1' || data->map[(int)y][(int)x] == ' ')
 			{
-				data->plr.mx = (int)x;
-				data->plr.my = (int)y;
+				data->plr.mx = x;
+				data->plr.my = y;
 				put_wall(&*data, i, c, a);
 				break;
 			}
