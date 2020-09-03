@@ -56,24 +56,24 @@ int		map_lst_to_mas(t_list *z_map, char ***map)
 	return (0);
 }
 
-t_list     *map_to_lst(const char *s)
+t_list		*map_to_lst(const char *s)
 {
-    t_list  *i_map;
-    t_list  *z_map;
-    char    *line;
-    int     fd;
+	t_list	*i_map;
+	t_list	*z_map;
+	char	*line;
+	int		fd;
 
-    fd = open(s, O_RDONLY);
+	fd = open(s, O_RDONLY);
 	check_errno();
-    z_map = NULL;
-    line = NULL;
-    while (get_next_line(fd, &line))
-    {
-        i_map = ft_lstnew(line);
-        ft_lstadd_back(&z_map, i_map);
-    }
-    i_map = ft_lstnew(line);
-    ft_lstadd_back(&z_map, i_map);
-    close(fd);
-    return (z_map);
+	z_map = NULL;
+	line = NULL;
+	while (get_next_line(fd, &line))
+	{
+		i_map = ft_lstnew(line);
+		ft_lstadd_back(&z_map, i_map);
+	}
+	i_map = ft_lstnew(line);
+	ft_lstadd_back(&z_map, i_map);
+	close(fd);
+	return (z_map);
 }

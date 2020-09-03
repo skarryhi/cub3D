@@ -1,9 +1,9 @@
 
 #include "cub3d.h"
 
-int             ft_key(int keycode, data_cub *data)
+int		ft_key(int keycode, data_cub *data)
 {
-	float	step = 0.5;
+	float	step = 0.3;
 
 	if (keycode == 53)
 	{

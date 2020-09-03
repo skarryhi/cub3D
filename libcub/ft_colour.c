@@ -12,14 +12,14 @@
 
 #include "cub3d.h"
 
-int		        create_trgb(int t, int r, int g, int b)
+int				create_trgb(int t, int r, int g, int b)
 {
 	return(t << 24 | r << 16 | g << 8 | b);
 }
 
-void            my_mlx_pixel_put(pix *data, int x, int y, int color)
+void			my_mlx_pixel_put(pix *data, int x, int y, int color)
 {
-	char    *dst;
+	char	*dst;
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
@@ -112,9 +112,10 @@ void			all_paint(data_cub *data, pix *img, void *mlx)
 {
 	data->win = mlx_new_window(mlx, data->r1, data->r2, "cub3D");
 	img->img = mlx_new_image(mlx, data->r1, data->r2);
-	// img = mlx_xpm_file_to_image(mlx, data->ea, &data->img.img_width, &data->img.img_height);
-	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length,
-								 &img->endian);
+	data->txt.n.img = mlx_xpm_file_to_image(mlx, data->no,\
+					&data->txt.n.width, &data->txt.n.height);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,\
+					&img->line_length, &img->endian);
 	put_map(&*data, &*img);
 	mlx_put_image_to_window(mlx, data->win, img->img, 0, 0);
 }

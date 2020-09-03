@@ -167,7 +167,7 @@ void 		check_ex_str(char **s, char *s2)
 		ft_exit("Invalid map");
 }
 
-int		    cardinal_type(char *s, data_cub *data)
+int			cardinal_type(char *s, data_cub *data)
 {
 	if (ft_strncmp(s, "NO", 2) == 0)
 		check_ex_str(&data->no, s + 3);
@@ -180,7 +180,7 @@ int		    cardinal_type(char *s, data_cub *data)
 	return (0);
 }
 
-void        data_init(data_cub *data)
+void		data_init(data_cub *data)
 {
 	data->r1 = -1;
 	data->r2 = -1;
