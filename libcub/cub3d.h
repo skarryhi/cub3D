@@ -18,39 +18,47 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <mlx.h>
-#include <math.h>
+# include <math.h>
 
 # define SCALE 10
 
 typedef struct  s_pix 
 {
-	void        *img;
-	char        *addr;
-	int         bits_per_pixel;
-	int         line_length;
-	int         endian;
-	int     	img_width;
-    int    		img_height;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			width;
+	int			height;
 }				pix;
 
 typedef struct	s_colour
 {
-	int	r;
-	int	g;
-	int	b;
+	int			r;
+	int			g;
+	int			b;
 }				colour;
 
 typedef struct	s_player
 {
-	float	x;
-	float	y;
-	float	dirx;
-	float	mx;
-	float	my;
+	float		x;
+	float		y;
+	float		dirx;
+	float		mx;
+	float		my;
 }				player;
 
+typedef struct	s_text
+{
+	pix			n;
+	pix			s;
+	pix			w;
+	pix			e;
+	pix			sp;
+}				txt;
 
-typedef struct	s_cub
+typedef struct		s_cub
 {
 	int				r1;
 	int				r2;
@@ -59,14 +67,15 @@ typedef struct	s_cub
 	char			*we;
 	char			*ea;
 	char			*s;
-	struct s_colour		f;
-	struct s_colour		c;
+	struct s_colour	f;
+	struct s_colour	c;
 	char			**map;
 	player			plr;
-	void		*mlx;
-	void		*win;
-	pix			img;
-}				data_cub;
+	void			*mlx;
+	void			*win;
+	pix				img;
+	txt				txt;
+}					data_cub;
 
 
 t_list		*map_to_lst(const char *s);
@@ -85,10 +94,10 @@ void 		check_ex_str(char **s, char *s2);
 void		check_valid_map(data_cub *data);
 void		data_check(data_cub data);
 int			create_trgb(int t, int r, int g, int b);
-int         ft_key(int keycode, data_cub *data);
+int			ft_key(int keycode, data_cub *data);
 void		put_map(data_cub *data, pix *img);
 void		all_paint(data_cub *data, pix *img, void *mlx);
-void		put_ray(data_cub *data, float x, float y);
-void        my_mlx_pixel_put(pix *data, int x, int y, int color);
+void		put_ray(data_cub *data, int i, float c);
+void		my_mlx_pixel_put(pix *data, int x, int y, int color);
 
 #endif
