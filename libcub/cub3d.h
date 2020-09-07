@@ -75,6 +75,7 @@ typedef struct		s_cub
 	void			*win;
 	pix				img;
 	txt				txt;
+	float			l;
 }					data_cub;
 
 
@@ -99,5 +100,7 @@ void		put_map(data_cub *data, pix *img);
 void		all_paint(data_cub *data, pix *img, void *mlx);
 void		put_ray(data_cub *data, int i, float c);
 void		my_mlx_pixel_put(pix *data, int x, int y, int color);
+int			trgb_wall(data_cub *data, float a, int y);
+int			getpixelcolor(pix *img, int x, int y);
 
 #endif

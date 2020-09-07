@@ -12,70 +12,41 @@
 
 #include "cub3d.h"
 
-int			trgb_wall(data_cub data, float a, int o)
-{
-	if (data.map[(int)data.plr.my][(int)(data.plr.mx - 0.02)] != '1' &&\
-		data.map[(int)data.plr.my][(int)(data.plr.mx + 0.02)] == '1' &&\
-		data.map[(int)(data.plr.my - 0.02)][(int)data.plr.mx] == '1' &&\
-		data.map[(int)(data.plr.my + 0.02)][(int)data.plr.mx] == '1')
-		o = create_trgb(0, 0, 128, 128);//blue
-	else if (data.map[(int)data.plr.my][(int)(data.plr.mx - 0.02)] == '1' &&\
-		data.map[(int)data.plr.my][(int)(data.plr.mx + 0.02)] == '1' &&\
-		data.map[(int)(data.plr.my - 0.02)][(int)data.plr.mx] != '1' &&\
-		data.map[(int)(data.plr.my + 0.02)][(int)data.plr.mx] == '1')
-		o = create_trgb(0, 255, 215, 0);//gold
-	else if (data.map[(int)data.plr.my][(int)(data.plr.mx - 0.02)] == '1' &&\
-		data.map[(int)data.plr.my][(int)(data.plr.mx + 0.02)] != '1' &&\
-		data.map[(int)(data.plr.my - 0.02)][(int)data.plr.mx] == '1' &&\
-		data.map[(int)(data.plr.my + 0.02)][(int)data.plr.mx] == '1')
-		o = create_trgb(0, 255, 140, 0);//orange
-	else if (data.map[(int)data.plr.my][(int)(data.plr.mx - 0.02)] == '1' &&\
-		data.map[(int)data.plr.my][(int)(data.plr.mx + 0.02)] == '1' &&\
-		data.map[(int)(data.plr.my - 0.02)][(int)data.plr.mx] == '1' &&\
-		data.map[(int)(data.plr.my + 0.02)][(int)data.plr.mx] != '1')
-		o = create_trgb(0, 238, 130, 238);//pink
-	else if (a < M_PI)
-		o = create_trgb(0, 255, 215, 0);//gold
-	else if (a > M_PI)
-		o = create_trgb(0, 238, 130, 238);//pink
-	return (o);
-}
 
-int			trgb_def_wall(data_cub data, float a)
+int			trgb_def_wall(float a)
 {
-	int	o;
-
 	if (a < 0)
 		a -= M_PI;
 	a = fabs(a);
 	while (a > 2 * M_PI)
 		a -= 2 * M_PI;
-	o = trgb_wall(data, a, create_trgb(0, 128, 128, 128));
-	return (o);
-
+	return (a);
 }
 
 void		put_wall(data_cub *data, int i, float c, float a)
 {
-	int o;
-	float l;
-	int y;
+	int		o;
+	int		y;
+	float	min_a;
+	float	l_cout;
 
-	o = trgb_def_wall(*data, a);
 	if ((c * cos(a - data->plr.dirx)) < 1)
-		l = (data->r2);
+		data->l = (data->r2);
 	else
-		l = (data->r2) / (c * cos(a - data->plr.dirx));
-	y = (data->r2 / 2) + (l / 2);
-	while (l > 0)
+		data->l = (data->r2) / (c * cos(a - data->plr.dirx));
+	y = (data->r2 / 2) + (data->l / 2);
+	min_a = trgb_def_wall(a);
+	l_cout = data->l;
+	while (l_cout > 0)
 	{
+		o = trgb_wall(&*data, min_a, y);
 		my_mlx_pixel_put(&data->img, i, y, o);
 		y--;
-		l--;
+		l_cout--;
 	}
 }
 
-float		ray_growth(data_cub *data,  float c, int i, float a)
+float		ray_growth(data_cub *data, float c, int i, float a)
 {
 	data->plr.mx = data->plr.x + c * cos(a);
 	data->plr.my = data->plr.y + c * sin(a);
