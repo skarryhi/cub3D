@@ -12,7 +12,6 @@
 
 #include "cub3d.h"
 
-
 int			trgb_def_wall(float a)
 {
 	if (a < 0)
@@ -53,6 +52,10 @@ float		ray_growth(data_cub *data, float c, int i, float a)
 {
 	data->plr.mx = data->plr.x + c * cos(a);
 	data->plr.my = data->plr.y + c * sin(a);
+	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
+	{
+		data->plr.count_sp++;
+	}
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '1' ||\
 		data->map[(int)data->plr.my][(int)data->plr.mx] == ' ')
 	{
@@ -61,7 +64,8 @@ float		ray_growth(data_cub *data, float c, int i, float a)
 	}
 	data->plr.mx = SCALE * data->plr.mx + 11;
 	data->plr.my = SCALE * data->plr.my + 11;
-	my_mlx_pixel_put(&data->img, data->plr.mx, data->plr.my, create_trgb(0, 50, 255, 50));
+	my_mlx_pixel_put(&data->img, data->plr.mx, data->plr.my, \
+					create_trgb(0, 50, 255, 50));
 	c += 0.01;
 	return (c);
 }
@@ -70,13 +74,14 @@ void		put_ray(data_cub *data, int i, float c)
 {
 	float	a;
 
+	data->plr.count_sp = 0;
 	a = data->plr.dirx - M_PI / 6;
 	data->plr.mx = 0;
 	data->plr.my = 0;
-	while(i <= data->r1)
+	while (i <= data->r1)
 	{
 		c = 0;
-		while (c < 1000) 
+		while (c < 1000)
 			c = ray_growth(&*data, c, i, a);
 		i++;
 		a = a + M_PI / (3 * data->r1);

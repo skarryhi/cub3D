@@ -46,23 +46,23 @@ int			trgb_wall(data_cub *data, float a, int y)
 		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.02)] == '1' &&\
 		data->map[(int)(data->plr.my - 0.02)][(int)data->plr.mx] == '1' &&\
 		data->map[(int)(data->plr.my + 0.02)][(int)data->plr.mx] == '1')
-		return (pix_for_s_n(&*data, &data->txt.s, y));//blue/S create_trgb(0, 0, 128, 128)
+		return (pix_for_s_n(&*data, &data->txt.s, y));
 	else if (data->map[(int)data->plr.my][(int)(data->plr.mx - 0.02)] == '1' &&\
 		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.02)] == '1' &&\
 		data->map[(int)(data->plr.my - 0.02)][(int)data->plr.mx] != '1' &&\
 		data->map[(int)(data->plr.my + 0.02)][(int)data->plr.mx] == '1')
-		return (pix_for_w_e(&*data, &data->txt.e, y));//gold create_trgb(0, 255, 215, 0)
+		return (pix_for_w_e(&*data, &data->txt.e, y));
 	else if (data->map[(int)data->plr.my][(int)(data->plr.mx - 0.02)] == '1' &&\
 		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.02)] != '1' &&\
 		data->map[(int)(data->plr.my - 0.02)][(int)data->plr.mx] == '1' &&\
 		data->map[(int)(data->plr.my + 0.02)][(int)data->plr.mx] == '1')
-		return (pix_for_s_n(&*data, &data->txt.n, y));//orangem create_trgb(0, 255, 140, 0) N
+		return (pix_for_s_n(&*data, &data->txt.n, y));
 	else if (data->map[(int)data->plr.my][(int)(data->plr.mx - 0.02)] == '1' &&\
 		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.02)] == '1' &&\
 		data->map[(int)(data->plr.my - 0.02)][(int)data->plr.mx] == '1' &&\
 		data->map[(int)(data->plr.my + 0.02)][(int)data->plr.mx] != '1')
-		return (pix_for_w_e(&*data, &data->txt.w, y));//pink create_trgb(0, 238, 130, 238)
+		return (pix_for_w_e(&*data, &data->txt.w, y));
 	else if (a < M_PI)
-		return (pix_for_w_e(&*data, &data->txt.e, y));//gold
-	return (pix_for_w_e(&*data, &data->txt.w, y));//pink
+		return (pix_for_w_e(&*data, &data->txt.e, y));
+	return (pix_for_w_e(&*data, &data->txt.w, y));
 }

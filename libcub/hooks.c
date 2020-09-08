@@ -3,7 +3,7 @@
 
 int		ft_key(int keycode, data_cub *data)
 {
-	float	step = 0.3;
+	float	step = 0.5;
 
 	if (keycode == 53)
 	{

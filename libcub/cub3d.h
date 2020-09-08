@@ -47,6 +47,7 @@ typedef struct	s_player
 	float		dirx;
 	float		mx;
 	float		my;
+	int			count_sp;
 }				player;
 
 typedef struct	s_text
@@ -102,5 +103,6 @@ void		put_ray(data_cub *data, int i, float c);
 void		my_mlx_pixel_put(pix *data, int x, int y, int color);
 int			trgb_wall(data_cub *data, float a, int y);
 int			getpixelcolor(pix *img, int x, int y);
+void		get_all_texture(data_cub *data, void *mlx, txt *txt);
 
 #endif

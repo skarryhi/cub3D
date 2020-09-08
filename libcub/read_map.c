@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void		map_mas_to_stuct(char **map, data_cub *data, int y)
+void	map_mas_to_stuct(char **map, data_cub *data, int y)
 {
 	while (map[y])
 	{
@@ -56,7 +56,7 @@ int		map_lst_to_mas(t_list *z_map, char ***map)
 	return (0);
 }
 
-t_list		*map_to_lst(const char *s)
+t_list	*map_to_lst(const char *s)
 {
 	t_list	*i_map;
 	t_list	*z_map;
