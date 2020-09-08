@@ -27,6 +27,7 @@ void		put_wall(data_cub *data, int i, float c, float a)
 {
 	int		o;
 	int		y;
+	int		h;
 	float	min_a;
 	float	l_cout;
 
@@ -37,11 +38,13 @@ void		put_wall(data_cub *data, int i, float c, float a)
 	y = (data->r2 / 2) + (data->l / 2);
 	min_a = trgb_def_wall(a);
 	l_cout = data->l;
+	h = data->l;
 	while (l_cout > 0)
 	{
-		o = trgb_wall(&*data, min_a, y);
+		o = trgb_wall(&*data, min_a, h);
 		my_mlx_pixel_put(&data->img, i, y, o);
 		y--;
+		h--;
 		l_cout--;
 	}
 }
