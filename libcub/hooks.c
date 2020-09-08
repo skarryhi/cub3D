@@ -59,6 +59,5 @@ int		ft_key(int keycode, data_cub *data)
 	if (keycode == 0)
 		data->plr.dirx -= M_PI / 16;
 	put_map(&*data, &data->img);
-	printf("%d\n", keycode);
 	return (0);
 }
