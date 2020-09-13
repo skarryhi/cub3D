@@ -47,12 +47,12 @@ float		place_sprite(data_cub data, float a, float c)
 	w += length;
 	return (length * 100 / w);
 }
-void        put_sprite(data_cub *data, int i, float c, float a)
+void		put_sprite(data_cub *data, int i, float c, float a)
 {
-	int        o;
-	int        y;
-	int        h;
-	float    l_cout;
+	int		o;
+	int		y;
+	int		h;
+	float	l_cout;
 
 	if ((c * cos(a - data->plr.dirx)) < 1)
 		data->l = (data->r2);
@@ -73,33 +73,33 @@ void        put_sprite(data_cub *data, int i, float c, float a)
 
 void		return_ray(data_cub *data, float c, int i, float a)
 {
-	float    dist_fr_wall;
-	float    depth;
-	float    place;
+	float	dist_fr_wall;
+	float	depth;
+	float	place;
 
-	dist_fr_wall = 0;
-	depth = 0;
-	while (data->plr.count_sp)
+	dist_fr_wall = c;
+	depth = 0.01;
+	while (data->plr.count_sp > 0)
 	{
-		data->plr.mx = data->plr.x - dist_fr_wall * cos(a);
-		data->plr.my = data->plr.y - dist_fr_wall * sin(a);
+		data->plr.mx = data->plr.x + dist_fr_wall * cos(a);
+		data->plr.my = data->plr.y + dist_fr_wall * sin(a);
+		// printf("{%f|%f|%c}", data->plr.mx, data->plr.my, data->map[(int)data->plr.my][(int)data->plr.mx]);
 		if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
 		{
-			data->plr.count_sp--;
-			// printf("{%f}", dist_fr_wall);
-
+			data->plr.count_sp--; //record to 4 str below
 			while (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
 			{
-				data->plr.mx = data->plr.x - dist_fr_wall * cos(a);
-				data->plr.my = data->plr.y - dist_fr_wall * sin(a);
+				data->plr.mx = data->plr.x + dist_fr_wall * cos(a);
+				data->plr.my = data->plr.y + dist_fr_wall * sin(a);
 				dist_fr_wall -= 0.01;
 				depth += 0.01;
 			}
-			place = place_sprite(*data, a, (dist_fr_wall + depth));
-			// put_sprite(&*data, i, (c + depth + dist_fr_wall), a);
+			// printf("{%f}", c);
+			place = place_sprite(*data, a, (dist_fr_wall + (depth / 2)));
+			// put_sprite(&*data, i, (dist_fr_wall + (depth / 2)), a); //+ depth 
+			// printf("{%f][%f][%f}", depth, c, dist_fr_wall);
 			i++;
 		}
 		dist_fr_wall -= 0.01;
-		c++;
 	}
 }

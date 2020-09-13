@@ -22,29 +22,36 @@ int			trgb_def_wall(float a)
 	return (a);
 }
 
-void		put_wall(data_cub *data, int i, float c, float a)
+void		put_wall(data_cub *data, int x_tex, float c, float a)
 {
 	int		o;
-	int		y;
-	int		h;
+	int		y_tex;
+	int		point;
 	float	min_a;
-	float	l_cout;
+	float	data_l_copy;
 
-	if ((c * cos(a - data->plr.dirx)) < 1)
-		data->l = (data->r2);
+	if ((c * cos(a - data->plr.dirx)) < 0.01)
+		data->l = (data->r2) / 0.01;
 	else
 		data->l = (data->r2) / (c * cos(a - data->plr.dirx));
-	y = (data->r2 / 2) + (data->l / 2);
-	min_a = trgb_def_wall(a);
-	l_cout = data->l;
-	h = data->l;
-	while (l_cout > 0)
+	y_tex = (data->r2 / 2) + (data->l / 2) - 1;
+	if (y_tex > data->r2)
 	{
-		o = trgb_wall(&*data, min_a, h);
-		my_mlx_pixel_put(&data->img, i, y, o);
-		y--;
-		h--;
-		l_cout--;
+		y_tex = data->r2;
+		point = (data->l / 2) + (data->r2 / 2);
+	}
+	else
+		point = data->l;
+	min_a = trgb_def_wall(a);
+	data_l_copy = data->l;
+	while (data_l_copy > 0 && y_tex > 0)
+	{
+		o = trgb_wall(&*data, min_a, point);
+		my_mlx_pixel_put(&data->img, x_tex, y_tex, o);
+		y_tex--;
+		point--;
+		data_l_copy--;
+		// printf("[%d]{%f}", point, data_l_copy);
 	}
 }
 

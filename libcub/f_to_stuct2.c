@@ -86,8 +86,8 @@ void	check_one_plr(data_cub *data, int y, int x)
 			if (data->map[y][x] == 'N' || data->map[y][x] == 'S'\
 				|| data->map[y][x] == 'E' || data->map[y][x] == 'W')
 			{
-				data->plr.x = x;
-				data->plr.y = y;
+				data->plr.x = x + 0.5;
+				data->plr.y = y + 0.5;
 				dir_plr(&*data, data->map[y][x]);
 				if (flag)
 					flag--;

@@ -17,9 +17,9 @@ void			put_sq2(int i, pix *img, int x, int y)
 	int x2 = SCALE;
 	int	y2 = SCALE;
 
-	while (y2)
+	while (y2 > 1)
 	{
-		while (x2)
+		while (x2 > 1)
 		{
 			my_mlx_pixel_put(&*img, (10 + (x * SCALE) + x2), \
 									(10 + (y * SCALE) + y2), i);
