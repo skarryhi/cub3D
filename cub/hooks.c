@@ -24,6 +24,12 @@ void	pushes(data_cub *data, float step, float a)
 	put_map(&*data, &data->img);
 }
 
+void	pushes_angl(data_cub *data, float a)
+{
+	data->plr.dirx += a;
+	put_map(&*data, &data->img);
+}
+
 int		ft_key(int keycode, data_cub *data)
 {
 	float	step;
@@ -43,9 +49,8 @@ int		ft_key(int keycode, data_cub *data)
 	if (keycode == 1)
 		pushes(&*data, -step, 0);
 	if (keycode == 2)
-		data->plr.dirx += M_PI / 16;
+		pushes_angl(&*data, M_PI / 16);
 	if (keycode == 0)
-		data->plr.dirx -= M_PI / 16;
-	put_map(&*data, &data->img);
+		pushes_angl(&*data, -(M_PI / 16));
 	return (0);
 }
