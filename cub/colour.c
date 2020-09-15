@@ -14,9 +14,11 @@
 
 void			put_sq2(int i, pix *img, int x, int y)
 {
-	int x2 = SCALE;
-	int	y2 = SCALE;
+	int x2;
+	int	y2;
 
+	x2 = SCALE;
+	y2 = SCALE;
 	while (y2 > 1)
 	{
 		while (x2 > 1)
@@ -29,11 +31,14 @@ void			put_sq2(int i, pix *img, int x, int y)
 		y2--;
 	}
 }
+
 void			put_plr(int i, pix *img, float x, float y)
 {
-	int x2 = SCALE / 2;
-	int	y2 = SCALE / 2;
+	int x2;
+	int	y2;
 
+	x2 = SCALE / 2;
+	y2 = SCALE / 2;
 	while (y2)
 	{
 		while (x2)
@@ -51,7 +56,7 @@ void			put_sq1(data_cub data, pix *img, int x, int y)
 {
 	while (data.map[y])
 	{
-		while (data.map[y][x] )
+		while (data.map[y][x])
 		{
 			if (data.map[y][x] == '1')
 				put_sq2(create_trgb(0, 0, 20, 0), &*img, x, y);
@@ -64,7 +69,7 @@ void			put_sq1(data_cub data, pix *img, int x, int y)
 	}
 }
 
-void				put_floor_ceiling(data_cub *data, int x, int y)
+void			put_floor_ceiling(data_cub *data, int x, int y)
 {
 	int		c;
 	int		f;
@@ -93,7 +98,7 @@ void				put_floor_ceiling(data_cub *data, int x, int y)
 	}
 }
 
-void				put_map(data_cub *data, pix *img)
+void			put_map(data_cub *data, pix *img)
 {
 	put_floor_ceiling(&*data, 0, 0);
 	put_ray(&*data, 0, 0);

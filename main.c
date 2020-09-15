@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libcub/cub3d.h"
+#include "cub/cub3d.h"
 
 int		main(int argc, char **argv)
 {

@@ -12,7 +12,7 @@
 
 NAME = libft.a
 HEADER = libft.h
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	ft_isdigit.c ft_isprint.c ft_memccpy.c ft_memchr.c ft_memcmp.c \
@@ -34,7 +34,7 @@ $(NAME): $(SRC_OBJ)
 	ranlib $(NAME)
 
 %.o: %.c $(HEADER)
-	gcc $(FLAGS) -c $< -o $@
+	gcc $(CFLAGS) -c $< -o $@
 	
 clean:
 	rm -rf $(SRC_OBJ)

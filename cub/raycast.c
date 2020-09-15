@@ -44,14 +44,10 @@ void		put_wall(data_cub *data, int x_tex, float c, float a)
 		point = data->l;
 	min_a = trgb_def_wall(a);
 	data_l_copy = data->l;
-	while (data_l_copy > 0 && y_tex > 0)
+	while (data_l_copy-- > 0 && y_tex > 0)
 	{
-		o = trgb_wall(&*data, min_a, point);
-		my_mlx_pixel_put(&data->img, x_tex, y_tex, o);
-		y_tex--;
-		point--;
-		data_l_copy--;
-		// printf("[%d]{%f}", point, data_l_copy);
+		o = trgb_wall(&*data, min_a, point--);
+		my_mlx_pixel_put(&data->img, x_tex, y_tex--, o);
 	}
 }
 
@@ -63,16 +59,14 @@ float		ray_growth(data_cub *data, float *c, int i, float a)
 	data->plr.mx = data->plr.x + *c * cos(a);
 	data->plr.my = data->plr.y + *c * sin(a);
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2' &&\
-		data->map[(int)data->plr.y][(int)data->plr.x] != '2')
-	{
-		data->plr.count_sp++;
+		data->map[(int)data->plr.y][(int)data->plr.x] != '2' &&\
+		++data->plr.count_sp)
 		while (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
 		{
 			data->plr.mx = data->plr.x + *c * cos(a);
 			data->plr.my = data->plr.y + *c * sin(a);
 			*c += 0.01;
 		}
-	}
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '1' ||\
 		data->map[(int)data->plr.my][(int)data->plr.mx] == ' ')
 	{
@@ -101,8 +95,8 @@ void		put_ray(data_cub *data, int i, float c)
 		c = 0;
 		while (c_break)
 			c_break = ray_growth(&*data, &c, i, a);
-		if (data->plr.count_sp)
-			return_ray(&*data, c, i, a);
+		/*if (data->plr.count_sp)
+			return_ray(&*data, c, i, a);*/
 		i++;
 		a = a + M_PI / (3 * data->r1);
 	}

@@ -12,31 +12,6 @@
 
 #include "cub3d.h"
 
-int		check_empty_s(char *s)
-{
-	while (*s)
-	{
-		if (*s != '\n')
-		{
-			free(s);
-			return (1);
-		}
-		s++;
-	}
-	return (0);
-}
-
-int		findmap(char *s)
-{
-	while (*s)
-	{
-		if (*s == '1')
-			return (1);
-		s++;
-	}
-	return (0);
-}
-
 int		r_type(char *s, int *r1, int *r2)
 {
 	if (*r1 == -1 && *r2 == -1)
@@ -86,10 +61,13 @@ int		colour_type(char *s, colour *l)
 
 int		size_x(char **s)
 {
-	int	max = 0;
-	int x = 0;
-	int	y = 0;
+	int	max;
+	int x;
+	int	y;
 
+	max = 0;
+	x = 0;
+	y = 0;
 	while (s[y])
 	{
 		while (s[y][x])

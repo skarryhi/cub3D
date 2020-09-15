@@ -88,6 +88,8 @@ int			check_empty_s(char *s);
 int			findmap(char *s);
 int			r_type(char *s, int *r1, int *r2);
 int			colour_type(char *s, colour *l);
+void		check_all_sim(char **m, int y, int x);
+void		check_one_plr(data_cub *data, int y, int x);
 void		map_mas_to_stuct(char **map, data_cub *data, int y);
 int			map_type(char **s, int y, data_cub *data);
 int			cardinal_type(char *s, data_cub *data);
@@ -104,6 +106,5 @@ void		my_mlx_pixel_put(pix *data, int x, int y, int color);
 int			trgb_wall(data_cub *data, float a, int y);
 int			getpixelcolor(pix *img, int x, int y);
 void		get_all_texture(data_cub *data, void *mlx, txt *txt);
-void		return_ray(data_cub *data, float c, int i, float a);
 
 #endif
