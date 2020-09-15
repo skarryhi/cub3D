@@ -12,6 +12,18 @@
 
 #include "cub3d.h"
 
+void	pushes(data_cub *data, float step, float a)
+{
+	data->plr.x = data->plr.x + step * cos(data->plr.dirx - a);
+	data->plr.y = data->plr.y + step * sin(data->plr.dirx - a);
+	if (data->map[(int)data->plr.y][(int)data->plr.x] == '1')
+	{
+		data->plr.x = data->plr.x - step * cos(data->plr.dirx - a);
+		data->plr.y = data->plr.y - step * sin(data->plr.dirx - a);
+	}
+	put_map(&*data, &data->img);
+}
+
 int		ft_key(int keycode, data_cub *data)
 {
 	float	step;
@@ -23,49 +35,13 @@ int		ft_key(int keycode, data_cub *data)
 		exit(0);
 	}
 	if (keycode == 123)
-	{
-		data->plr.x = data->plr.x + step * cos(data->plr.dirx - M_PI / 2);
-		data->plr.y = data->plr.y + step * sin(data->plr.dirx - M_PI / 2);
-		if (data->map[(int)data->plr.y][(int)data->plr.x] == '1')
-		{
-			data->plr.x = data->plr.x - step * cos(data->plr.dirx - M_PI / 2);
-			data->plr.y = data->plr.y - step * sin(data->plr.dirx - M_PI / 2);
-		}
-		put_map(&*data, &data->img);
-	}
+		pushes(&*data, step, (M_PI / 2));
 	if (keycode == 124)
-	{
-		data->plr.x = data->plr.x + step * cos(data->plr.dirx + M_PI / 2);
-		data->plr.y = data->plr.y + step * sin(data->plr.dirx + M_PI / 2);
-		if (data->map[(int)data->plr.y][(int)data->plr.x] == '1')
-		{
-			data->plr.x = data->plr.x - step * cos(data->plr.dirx + M_PI / 2);
-			data->plr.y = data->plr.y - step * sin(data->plr.dirx + M_PI / 2);
-		}
-		put_map(&*data, &data->img);
-	}
+		pushes(&*data, step, -(M_PI / 2));
 	if (keycode == 13)
-	{
-		data->plr.x = data->plr.x + step * cos(data->plr.dirx);
-		data->plr.y = data->plr.y + step * sin(data->plr.dirx);
-		if (data->map[(int)data->plr.y][(int)data->plr.x] == '1')
-		{
-			data->plr.x = data->plr.x - step * cos(data->plr.dirx);
-			data->plr.y = data->plr.y - step * sin(data->plr.dirx);
-		}
-		put_map(&*data, &data->img);
-	}
+		pushes(&*data, step, 0);
 	if (keycode == 1)
-	{
-		data->plr.x = data->plr.x - step * cos(data->plr.dirx);
-		data->plr.y = data->plr.y - step * sin(data->plr.dirx);
-		if (data->map[(int)data->plr.y][(int)data->plr.x] == '1')
-		{
-			data->plr.x = data->plr.x + step * cos(data->plr.dirx);
-			data->plr.y = data->plr.y + step * sin(data->plr.dirx);
-		}
-		put_map(&*data, &data->img);
-	}
+		pushes(&*data, -step, 0);
 	if (keycode == 2)
 		data->plr.dirx += M_PI / 16;
 	if (keycode == 0)
