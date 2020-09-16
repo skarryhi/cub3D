@@ -14,8 +14,9 @@
 
 void	ft_exit(char *s)
 {
-	perror(s);
-	exit(-1);
+	if (s)
+		perror(s);
+	exit(0);
 }
 
 void	check_errno(void)
@@ -25,4 +26,10 @@ void	check_errno(void)
 		perror("Program stopped");
 		exit(errno);
 	}
+}
+
+int		ft_key_exit(void)
+{
+	exit(0);
+	return (0);
 }

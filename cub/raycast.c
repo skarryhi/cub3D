@@ -59,7 +59,6 @@ float		ray_growth(data_cub *data, float *c, int i, float a)
 	data->plr.mx = data->plr.x + *c * cos(a);
 	data->plr.my = data->plr.y + *c * sin(a);
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2' &&\
-		data->map[(int)data->plr.y][(int)data->plr.x] != '2' &&\
 		++data->plr.count_sp)
 		while (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
 		{
@@ -95,8 +94,8 @@ void		put_ray(data_cub *data, int i, float c)
 		c = 0;
 		while (c_break)
 			c_break = ray_growth(&*data, &c, i, a);
-		/*if (data->plr.count_sp)
-			return_ray(&*data, c, i, a);*/
+		if (data->plr.count_sp)
+			return_ray(&*data, c, i, a);
 		i++;
 		a = a + M_PI / (3 * data->r1);
 	}

@@ -31,6 +31,7 @@ int		main(int argc, char **argv)
 	data.mlx = mlx_init();
 	all_paint(&data, &data.img, data.mlx);
 	mlx_hook(data.win, 2, 0, ft_key, &data);
+	mlx_hook(data.win, 17, 0, ft_key_exit, NULL);
 	mlx_loop(data.mlx);
 	return (0);
 }
