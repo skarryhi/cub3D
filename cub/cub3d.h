@@ -40,6 +40,16 @@ typedef struct	s_colour
 	int			b;
 }				colour;
 
+typedef struct		sp_list
+{
+	int				x;
+	int				y;
+	float			h;
+	float			w;
+	float			s;
+	struct sp_list	*next;
+}					sprite_list;
+
 typedef struct	s_player
 {
 	float		x;
@@ -47,7 +57,7 @@ typedef struct	s_player
 	float		dirx;
 	float		mx;
 	float		my;
-	int			count_sp;
+	sprite_list	*sp;
 }				player;
 
 typedef struct	s_text
@@ -108,5 +118,6 @@ int			getpixelcolor(pix *img, int x, int y);
 void		get_all_texture(data_cub *data, void *mlx, txt *txt);
 int			ft_key_exit(void);
 void		return_ray(data_cub *data, float c, int i, float a);
+void		new_sprite(data_cub *data);
 
 #endif

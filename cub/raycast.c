@@ -58,14 +58,16 @@ float		ray_growth(data_cub *data, float *c, int i, float a)
 
 	data->plr.mx = data->plr.x + *c * cos(a);
 	data->plr.my = data->plr.y + *c * sin(a);
-	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2' &&\
-		++data->plr.count_sp)
+	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
+	{
+		new_sprite(&*data);
 		while (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
 		{
 			data->plr.mx = data->plr.x + *c * cos(a);
 			data->plr.my = data->plr.y + *c * sin(a);
 			*c += 0.01;
 		}
+	}
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '1' ||\
 		data->map[(int)data->plr.my][(int)data->plr.mx] == ' ')
 	{
@@ -90,12 +92,11 @@ void		put_ray(data_cub *data, int i, float c)
 	while (i <= data->r1)
 	{
 		c_break = 1;
-		data->plr.count_sp = 0;
 		c = 0;
 		while (c_break)
 			c_break = ray_growth(&*data, &c, i, a);
-		if (data->plr.count_sp)
-			return_ray(&*data, c, i, a);
+		// if (data->plr.count_sp)
+		// 	return_ray(&*data, c, i, a);
 		i++;
 		a = a + M_PI / (3 * data->r1);
 	}
