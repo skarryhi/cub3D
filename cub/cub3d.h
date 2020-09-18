@@ -119,10 +119,12 @@ void		my_mlx_pixel_put(pix *data, int x, int y, int color);
 int			trgb_wall(data_cub *data, float a, int y);
 int			getpixelcolor(pix *img, int x, int y);
 void		get_all_texture(data_cub *data, void *mlx, txt *txt);
+void		get_one_texture(void *mlx, pix *n, char *no);
 int			ft_key_exit(void);
 void		return_ray(data_cub *data, float c, int i, float a);
 void		new_sprite(data_cub *data);
 void		cleaning_lst(data_cub *data);
 int			pix_for_sp(pix *s, float h, float w);
+void		create_lst(data_cub *data, sprite_list *counter);
 
 #endif

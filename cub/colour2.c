@@ -20,7 +20,7 @@ void			my_mlx_pixel_put(pix *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int			getpixelcolor(pix *img, int x, int y)
+int				getpixelcolor(pix *img, int x, int y)
 {
 	if (!img->width || !img->height)
 		return (0);
@@ -41,24 +41,4 @@ void			all_paint(data_cub *data, pix *img, void *mlx)
 	get_all_texture(&*data, mlx, &data->txt);
 	put_map(&*data, &*img);
 	mlx_put_image_to_window(mlx, data->win, img->img, 0, 0);
-}
-
-void		get_one_texture(void *mlx, pix *n, char *no)
-{
-	n->img = mlx_xpm_file_to_image(mlx, no, &n->width, &n->height);
-	if (n->img == NULL)
-		ft_exit("Invalid texture");
-	else
-		n->addr = mlx_get_data_addr(n->img, &n->bits_per_pixel,\
-				&n->line_length, &n->endian);
-
-}
-
-void		get_all_texture(data_cub *data, void *mlx, txt *txt)
-{
-	get_one_texture(mlx, &txt->n, data->no);
-	get_one_texture(mlx, &txt->s, data->so);
-	get_one_texture(mlx, &txt->e, data->we);
-	get_one_texture(mlx, &txt->w, data->ea);
-	get_one_texture(mlx, &txt->sp, data->s);
 }

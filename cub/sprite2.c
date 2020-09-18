@@ -12,6 +12,26 @@
 
 #include "cub3d.h"
 
+void		create_lst(data_cub *data, sprite_list *counter)
+{
+	sprite_list	*sp;
+
+	sp = (sprite_list *)malloc(sizeof(sprite_list));
+	sp->w = 0;
+	sp->x = data->plr.mx;
+	sp->y = data->plr.my;
+	sp->s = sqrt(pow(data->plr.x - sp->x, 2) + pow(data->plr.y - sp->y, 2));
+	if (sp->s < 1)
+		sp->h = (data->r2);
+	else
+		sp->h = (data->r2) / sp->s;
+	sp->next = NULL;
+	if (data->plr.sp == NULL)
+		data->plr.sp = sp;
+	else
+		counter->next = sp;
+}
+
 void		cleaning_lst(data_cub *data)
 {
 	void	*nxt;
@@ -19,7 +39,7 @@ void		cleaning_lst(data_cub *data)
 	while (data->plr.sp)
 	{
 		nxt = data->plr.sp->next;
-		free (data->plr.sp);
+		free(data->plr.sp);
 		data->plr.sp = nxt;
 	}
 }
