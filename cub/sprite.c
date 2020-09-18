@@ -33,7 +33,7 @@ int			finder_lst(data_cub data, int y, int x, char c)
 	return (0);
 }
 
-void		plus_w(data_cub *data, int y, int x)
+void		plus_w(data_cub *data, int y, int x, int z)
 {
 	sprite_list	*counter;
 
@@ -42,7 +42,7 @@ void		plus_w(data_cub *data, int y, int x)
 	{
 		if (counter->x == x && counter->y == y)
 		{
-			counter->w++;
+			counter->w = counter->w + 1 + z;
 			return ;
 		}
 		else
@@ -94,7 +94,10 @@ void		put_sprite(data_cub *data, int i, int l_y, int l_x)
 	h = finder_lst(*data, l_y, l_x, 'h');
 	if (finder_lst(*data, l_y, l_x, 'w') < h)
 	{
-		plus_w(&*data, l_y, l_x);
+		if (i == 0)
+			plus_w(&*data, l_y, l_x, 0);
+		else
+			plus_w(&*data, l_y, l_x, 0);
 		y = (data->r2 / 2) + (h / 2);
 		h_cout = h;
 		while (h_cout > 0)
@@ -125,14 +128,16 @@ void		return_ray(data_cub *data, float c, int i, float a)
 		{
 			data->plr.count_sp--;
 			// if ((int)data->plr.my != (int)data->plr.y && (int)data->plr.mx != (int)data->plr.x)
-				put_sprite(&*data, i, (int)data->plr.my, (int)data->plr.mx);
+			
 			while (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
 			{
 				data->plr.mx = data->plr.x + dist_fr_wall * cos(a);
 				data->plr.my = data->plr.y + dist_fr_wall * sin(a);
 				dist_fr_wall -= 0.01;
 				depth += 0.01;
-			}
+			}	
+			put_sprite(&*data, i, (int)(data->plr.y + (dist_fr_wall + 0.8)* sin(a)),\
+									(int)(data->plr.x +(dist_fr_wall + 0.8) * cos(a)));
 			i += 0;
 		}
 		dist_fr_wall -= 0.01;

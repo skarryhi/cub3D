@@ -44,6 +44,8 @@ typedef struct		sp_list
 {
 	int				x;
 	int				y;
+	int				i;
+	int				i2;
 	float			h;
 	float			w;
 	float			s;
