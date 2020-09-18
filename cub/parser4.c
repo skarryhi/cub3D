@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void		dir_plr(data_cub *data, char c)
+void		dir_plr(t_data_cub *data, char c)
 {
 	if (c == 'N')
 		data->plr.dirx = M_PI + M_PI / 2;
@@ -24,7 +24,7 @@ void		dir_plr(data_cub *data, char c)
 		data->plr.dirx = M_PI;
 }
 
-void		check_one_plr(data_cub *data, int y, int x)
+void		check_one_plr(t_data_cub *data, int y, int x)
 {
 	int	flag;
 

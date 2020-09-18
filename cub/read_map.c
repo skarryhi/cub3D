@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	map_mas_to_stuct(char **map, data_cub *data, int y)
+void	map_mas_to_stuct(char **map, t_data_cub *data, int y)
 {
 	while (map[y])
 	{

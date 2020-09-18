@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-void		create_lst(data_cub *data, sprite_list *counter)
+void		create_lst(t_data_cub *data, t_sprite_list *counter)
 {
-	sprite_list	*sp;
+	t_sprite_list	*sp;
 
-	sp = (sprite_list *)malloc(sizeof(sprite_list));
+	sp = (t_sprite_list *)malloc(sizeof(t_sprite_list));
 	sp->w = 0;
 	sp->x = data->plr.mx;
 	sp->y = data->plr.my;
@@ -32,7 +32,7 @@ void		create_lst(data_cub *data, sprite_list *counter)
 		counter->next = sp;
 }
 
-void		cleaning_lst(data_cub *data)
+void		cleaning_lst(t_data_cub *data)
 {
 	void	*nxt;
 
@@ -44,7 +44,7 @@ void		cleaning_lst(data_cub *data)
 	}
 }
 
-int			pix_for_sp(pix *s, float h, float w)
+int			pix_for_sp(t_pix *s, float h, float w)
 {
 	int		x1;
 	int		y1;

@@ -12,9 +12,9 @@
 
 #include "cub3d.h"
 
-int			finder_lst(data_cub data, int y, int x, char c)
+int			finder_lst(t_data_cub data, int y, int x, char c)
 {
-	sprite_list	*counter;
+	t_sprite_list	*counter;
 
 	counter = data.plr.sp;
 	while (counter)
@@ -32,9 +32,9 @@ int			finder_lst(data_cub data, int y, int x, char c)
 	return (0);
 }
 
-void		plus_w(data_cub *data, int y, int x, int z)
+void		plus_w(t_data_cub *data, int y, int x, int z)
 {
-	sprite_list	*counter;
+	t_sprite_list	*counter;
 
 	counter = data->plr.sp;
 	while (counter)
@@ -49,9 +49,9 @@ void		plus_w(data_cub *data, int y, int x, int z)
 	}
 }
 
-void		new_sprite(data_cub *data)
+void		new_sprite(t_data_cub *data)
 {
-	sprite_list	*counter;
+	t_sprite_list	*counter;
 
 	counter = data->plr.sp;
 	if ((sqrt(pow(data->plr.x - data->plr.mx, 2) + \
@@ -68,7 +68,7 @@ void		new_sprite(data_cub *data)
 	create_lst(&*data, counter);
 }
 
-void		put_sprite(data_cub *data, int i, int l_y, int l_x)
+void		put_sprite(t_data_cub *data, int i, int l_y, int l_x)
 {
 	int		o;
 	int		y;
@@ -97,7 +97,7 @@ void		put_sprite(data_cub *data, int i, int l_y, int l_x)
 	}
 }
 
-void		return_ray(data_cub *data, float c, int i, float a)
+void		return_ray(t_data_cub *data, float c, int i, float a)
 {
 	float	dist_fr_wall;
 	float	depth;

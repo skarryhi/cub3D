@@ -22,7 +22,7 @@ int			trgb_def_wall(float a)
 	return (a);
 }
 
-void		put_wall(data_cub *data, int x_tex, float c, float a)
+void		put_wall(t_data_cub *data, int x_tex, float c, float a)
 {
 	int		o;
 	int		y_tex;
@@ -51,11 +51,8 @@ void		put_wall(data_cub *data, int x_tex, float c, float a)
 	}
 }
 
-float		ray_growth(data_cub *data, float *c, int i, float a)
+float		ray_growth(t_data_cub *data, float *c, int i, float a)
 {
-	float	green_x;
-	float	green_y;
-
 	data->plr.mx = data->plr.x + *c * cos(a);
 	data->plr.my = data->plr.y + *c * sin(a);
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
@@ -75,14 +72,12 @@ float		ray_growth(data_cub *data, float *c, int i, float a)
 		put_wall(&*data, i, *c, a);
 		return (0);
 	}
-	green_x = SCALE * data->plr.mx + 11;
-	green_y = SCALE * data->plr.my + 11;
-	my_mlx_pixel_put(&data->img, green_x, green_y, 3342130);
+	green_ray(&*data);
 	*c += 0.01;
 	return (1);
 }
 
-void		put_ray(data_cub *data, int i, float c)
+void		put_ray(t_data_cub *data, int i, float c)
 {
 	float	a;
 	int		c_break;

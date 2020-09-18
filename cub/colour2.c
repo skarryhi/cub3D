@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void			my_mlx_pixel_put(pix *data, int x, int y, int color)
+void			my_mlx_pixel_put(t_pix *data, int x, int y, int color)
 {
 	char	*dst;
 
@@ -20,7 +20,7 @@ void			my_mlx_pixel_put(pix *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int				getpixelcolor(pix *img, int x, int y)
+int				getpixelcolor(t_pix *img, int x, int y)
 {
 	if (!img->width || !img->height)
 		return (0);
@@ -32,7 +32,7 @@ int				getpixelcolor(pix *img, int x, int y)
 		* (img->bits_per_pixel / 8))));
 }
 
-void			all_paint(data_cub *data, pix *img, void *mlx)
+void			all_paint(t_data_cub *data, t_pix *img, void *mlx)
 {
 	data->win = mlx_new_window(mlx, data->r1, data->r2, "cub3D");
 	img->img = mlx_new_image(mlx, data->r1, data->r2);

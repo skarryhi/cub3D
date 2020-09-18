@@ -33,7 +33,7 @@ int		r_type(char *s, int *r1, int *r2)
 	return (0);
 }
 
-int		colour_type(char *s, colour *l)
+int		colour_type(char *s, t_colour *l)
 {
 	if (l->r == -1 && l->g == -1 && l->b == -1)
 	{
@@ -104,7 +104,7 @@ char	*ft_record(char *s, int x)
 	return (re);
 }
 
-int		map_type(char **s, int y, data_cub *data)
+int		map_type(char **s, int y, t_data_cub *data)
 {
 	int	i;
 	int	j;

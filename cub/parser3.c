@@ -37,7 +37,7 @@ int		findmap(char *s)
 	return (0);
 }
 
-void	data_init(data_cub *data)
+void	data_init(t_data_cub *data)
 {
 	data->r1 = -1;
 	data->r2 = -1;
@@ -54,7 +54,7 @@ void	data_init(data_cub *data)
 	data->c.b = -1;
 }
 
-void	data_check(data_cub data)
+void	data_check(t_data_cub data)
 {
 	if (data.r1 == -1 || data.r2 == -1\
 	|| data.no == NULL || data.so == NULL\
@@ -66,7 +66,7 @@ void	data_check(data_cub data)
 		ft_exit("Invalid map");
 }
 
-int		cardinal_type(char *s, data_cub *data)
+int		cardinal_type(char *s, t_data_cub *data)
 {
 	if (ft_strncmp(s, "NO", 2) == 0)
 		check_ex_str(&data->no, s + 3);

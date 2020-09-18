@@ -31,9 +31,9 @@ fclean:	clean
 re:		fclean all
 
 norm: 
-	norminette ./cub/ ./libft main.c
+	norminette ./cub/*.c ./libft/*.c main.c
 
 cubnorm:
-	norminette ./cub/
+	norminette ./cub/*.c
 
 .PHONY: all clean fclean re norm

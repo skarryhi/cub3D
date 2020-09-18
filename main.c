@@ -17,7 +17,7 @@ int		main(int argc, char **argv)
 	int			i;
 	char		**map;
 	t_list		*z_map;
-	data_cub	data;
+	t_data_cub	data;
 
 	i = 0;
 	errno = 0;

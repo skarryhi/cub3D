@@ -82,7 +82,7 @@ void		check_all_null(char **m, int y, int x)
 	check_by_x(m, y, 1);
 }
 
-void		check_valid_map(data_cub *data)
+void		check_valid_map(t_data_cub *data)
 {
 	check_all_sim(data->map, 0, 0);
 	check_one_plr(&*data, 0, 0);

@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-int			pix_for_s_n(data_cub *data, pix *s, int y)
+int			pix_for_s_n(t_data_cub *data, t_pix *s, int y)
 {
 	int		x1;
 	int		y1;
@@ -26,7 +26,7 @@ int			pix_for_s_n(data_cub *data, pix *s, int y)
 	return (getpixelcolor(&*s, x1, y1));
 }
 
-int			pix_for_w_e(data_cub *data, pix *s, int y)
+int			pix_for_w_e(t_data_cub *data, t_pix *s, int y)
 {
 	int		x1;
 	int		y1;
@@ -40,7 +40,7 @@ int			pix_for_w_e(data_cub *data, pix *s, int y)
 	return (getpixelcolor(&*s, x1, y1));
 }
 
-int			trgb_wall(data_cub *data, float a, int y)
+int			trgb_wall(t_data_cub *data, float a, int y)
 {
 	if (data->map[(int)data->plr.my][(int)(data->plr.mx - 0.02)] != '1' &&\
 		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.02)] == '1' &&\

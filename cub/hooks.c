@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void	pushes(data_cub *data, float step, float a)
+void	pushes(t_data_cub *data, float step, float a)
 {
 	data->plr.x = data->plr.x + step * cos(data->plr.dirx - a);
 	data->plr.y = data->plr.y + step * sin(data->plr.dirx - a);
@@ -24,13 +24,13 @@ void	pushes(data_cub *data, float step, float a)
 	put_map(&*data, &data->img);
 }
 
-void	pushes_angl(data_cub *data, float a)
+void	pushes_angl(t_data_cub *data, float a)
 {
 	data->plr.dirx += a;
 	put_map(&*data, &data->img);
 }
 
-int		ft_key(int keycode, data_cub *data)
+int		ft_key(int keycode, t_data_cub *data)
 {
 	float	step;
 

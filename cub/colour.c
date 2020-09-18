@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void			put_sq2(int i, pix *img, int x, int y)
+void			put_sq2(int i, t_pix *img, int x, int y)
 {
 	int x2;
 	int	y2;
@@ -32,7 +32,7 @@ void			put_sq2(int i, pix *img, int x, int y)
 	}
 }
 
-void			put_plr(int i, pix *img, float x, float y)
+void			put_plr(int i, t_pix *img, float x, float y)
 {
 	int x2;
 	int	y2;
@@ -52,7 +52,7 @@ void			put_plr(int i, pix *img, float x, float y)
 	}
 }
 
-void			put_sq1(data_cub data, pix *img, int x, int y)
+void			put_sq1(t_data_cub data, t_pix *img, int x, int y)
 {
 	while (data.map[y])
 	{
@@ -69,7 +69,7 @@ void			put_sq1(data_cub data, pix *img, int x, int y)
 	}
 }
 
-void			put_floor_ceiling(data_cub *data, int x, int y)
+void			put_floor_ceiling(t_data_cub *data, int x, int y)
 {
 	int		c;
 	int		f;
@@ -98,7 +98,7 @@ void			put_floor_ceiling(data_cub *data, int x, int y)
 	}
 }
 
-void			put_map(data_cub *data, pix *img)
+void			put_map(t_data_cub *data, t_pix *img)
 {
 	put_floor_ceiling(&*data, 0, 0);
 	put_ray(&*data, 0, 0);
