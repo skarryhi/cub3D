@@ -15,7 +15,10 @@
 void	ft_exit(char *s)
 {
 	if (s)
-		perror(s);
+	{
+		ft_putstr_fd(s, 1);
+		ft_putchar_fd('\n', 1);
+	}
 	exit(0);
 }
 

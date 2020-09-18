@@ -31,10 +31,7 @@ int		r_type(char *s, int *r1, int *r2)
 	if (*r1 <= -1 || *r2 <= -1)
 		ft_exit("Invalid map");
 	if (*r1 < 640 || *r2 < 360)
-	{
-		*r1 = 640;
-		*r2 = 360;
-	}
+		ft_exit("Very small map");
 	if (*r1 > 2560 || *r2 > 1440)
 	{
 		*r1 = 2560;
@@ -48,14 +45,16 @@ int		colour_type(char *s, t_colour *l)
 	if (l->r == -1 && l->g == -1 && l->b == -1)
 	{
 		l->r = ft_atoi(s);
-		while (ft_isdigit(*s))
+		while (ft_isdigit(*s) || *s == ' ')
 			s++;
 		s++;
 		l->g = ft_atoi(s);
-		while (ft_isdigit(*s))
+		while (ft_isdigit(*s) || *s == ' ')
 			s++;
 		s++;
 		l->b = ft_atoi(s);
+		while (*s == ' ')
+			s++;
 		while (ft_isdigit(*s))
 			s++;
 		if (*s)
