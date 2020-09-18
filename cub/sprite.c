@@ -57,6 +57,8 @@ void		new_sprite(data_cub *data)
 	sprite_list	*counter;
 
 	counter = data->plr.sp;
+	if ((sqrt(pow(data->plr.x - data->plr.mx, 2) + pow(data->plr.y - data->plr.my, 2))) < 0.5)
+		return ;
 	while (counter)
 	{
 		if (counter->x == (int)data->plr.mx && counter->y == (int)data->plr.my)
@@ -95,7 +97,7 @@ void		put_sprite(data_cub *data, int i, int l_y, int l_x)
 	if (finder_lst(*data, l_y, l_x, 'w') < h)
 	{
 		if (i == 0)
-			plus_w(&*data, l_y, l_x, 0);
+			plus_w(&*data, l_y, l_x, finder_lst(*data, l_y, l_x, 'h') / 2);
 		else
 			plus_w(&*data, l_y, l_x, 0);
 		y = (data->r2 / 2) + (h / 2);
@@ -138,7 +140,6 @@ void		return_ray(data_cub *data, float c, int i, float a)
 			}	
 			put_sprite(&*data, i, (int)(data->plr.y + (dist_fr_wall + 0.8)* sin(a)),\
 									(int)(data->plr.x +(dist_fr_wall + 0.8) * cos(a)));
-			i += 0;
 		}
 		dist_fr_wall -= 0.01;
 	}
