@@ -30,6 +30,16 @@ int		r_type(char *s, int *r1, int *r2)
 		ft_exit("Invalid map");
 	if (*r1 <= -1 || *r2 <= -1)
 		ft_exit("Invalid map");
+	if (*r1 < 640 || *r2 < 360)
+	{
+		*r1 = 640;
+		*r2 = 360;
+	}
+	if (*r1 > 2560 || *r2 > 1440)
+	{
+		*r1 = 2560;
+		*r2 = 1440;
+	}
 	return (0);
 }
 
@@ -59,7 +69,7 @@ int		colour_type(char *s, t_colour *l)
 	return (0);
 }
 
-int		size_x(char **s)
+int		size_x(t_data_cub *data, char **s)
 {
 	int	max;
 	int x;
@@ -79,6 +89,7 @@ int		size_x(char **s)
 		x = 0;
 		y++;
 	}
+	data->plr.map_y = y;
 	return (max);
 }
 
@@ -112,7 +123,8 @@ int		map_type(char **s, int y, t_data_cub *data)
 
 	i = 0;
 	j = y;
-	x = size_x(s);
+	x = size_x(&*data, s);
+	data->plr.map_x = x;
 	while (s[j++])
 		i++;
 	data->map = (char**)malloc(sizeof(char*) * (i + 1));

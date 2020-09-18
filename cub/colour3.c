@@ -41,7 +41,10 @@ void		green_ray(t_data_cub *data)
 	float	green_x;
 	float	green_y;
 
-	green_x = SCALE * data->plr.mx + 11;
-	green_y = SCALE * data->plr.my + 11;
-	my_mlx_pixel_put(&data->img, green_x, green_y, 3342130);
+	if (data->plr.map_x < data->r1 / 12 && data->plr.map_y < data->r2 / 13)
+	{
+		green_x = SCALE * data->plr.mx + 11;
+		green_y = SCALE * data->plr.my + 11;
+		my_mlx_pixel_put(&data->img, green_x, green_y, 3342130);
+	}
 }

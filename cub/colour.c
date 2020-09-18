@@ -103,7 +103,10 @@ void			put_map(t_data_cub *data, t_pix *img)
 	put_floor_ceiling(&*data, 0, 0);
 	put_ray(&*data, 0, 0);
 	cleaning_lst(&*data);
-	put_sq1(*data, &*img, 0, 0);
-	put_plr(create_trgb(0, 139, 0, 0), &*img, data->plr.x, data->plr.y);
+	if (data->plr.map_x < data->r1 / 12 && data->plr.map_y < data->r2 / 13)
+	{
+		put_sq1(*data, &*img, 0, 0);
+		put_plr(create_trgb(0, 139, 0, 0), &*img, data->plr.x, data->plr.y);
+	}
 	mlx_put_image_to_window(data->mlx, data->win, img->img, 0, 0);
 }

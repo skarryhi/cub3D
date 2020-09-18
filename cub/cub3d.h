@@ -60,6 +60,8 @@ typedef struct			s_player
 	float				mx;
 	float				my;
 	int					count_sp;
+	int					map_x;
+	int					map_y;
 	t_sprite_list		*sp;
 }						t_player;
 

@@ -62,7 +62,7 @@ void	data_check(t_data_cub data)
 	|| data.s == NULL || data.f.r == -1\
 	|| data.f.g == -1 || data.f.b == -1\
 	|| data.c.r == -1 || data.c.g == -1\
-	|| data.c.b == -1)
+	|| data.c.b == -1 || !data.map)
 		ft_exit("Invalid map");
 }
 
