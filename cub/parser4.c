@@ -15,7 +15,7 @@
 void		dir_plr(t_data_cub *data, char c)
 {
 	if (c == 'N')
-		data->plr.dirx = M_PI + M_PI / 2;
+		data->plr.dirx = 3 * M_PI / 2;
 	if (c == 'S')
 		data->plr.dirx = M_PI / 2;
 	if (c == 'E')

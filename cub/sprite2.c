@@ -16,7 +16,8 @@ void		create_lst(t_data_cub *data, t_sprite_list *counter)
 {
 	t_sprite_list	*sp;
 
-	sp = (t_sprite_list *)malloc(sizeof(t_sprite_list));
+	if (!(sp = (t_sprite_list *)malloc(sizeof(t_sprite_list))))
+		ft_exit("Error of malloc");
 	sp->w = 0;
 	sp->x = data->plr.mx;
 	sp->y = data->plr.my;

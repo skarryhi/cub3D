@@ -30,10 +30,12 @@ fclean:	clean
 
 re:		fclean all
 
+bonus: all
+
 norm: 
 	norminette ./cub/*.c ./libft/*.c main.c
 
 cubnorm:
 	norminette ./cub/*.c
 
-.PHONY: all clean fclean re norm
+.PHONY: all clean fclean re bonus norm cubnorm

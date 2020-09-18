@@ -44,7 +44,8 @@ int		map_lst_to_mas(t_list *z_map, char ***map)
 	int		i;
 
 	size = ft_lstsize(z_map);
-	*map = (char**)malloc(sizeof(char*) * (size + 1));
+	if (!(*map = (char**)malloc(sizeof(char*) * (size + 1))))
+		ft_exit("Error of malloc");
 	map[0][size] = NULL;
 	i = 0;
 	while (size != i)
@@ -70,9 +71,13 @@ t_list	*map_to_lst(const char *s)
 	while (get_next_line(fd, &line))
 	{
 		i_map = ft_lstnew(line);
+		if (!i_map)
+			ft_exit("Error of malloc");
 		ft_lstadd_back(&z_map, i_map);
 	}
 	i_map = ft_lstnew(line);
+	if (!i_map)
+		ft_exit("Error of malloc");
 	ft_lstadd_back(&z_map, i_map);
 	close(fd);
 	return (z_map);

@@ -98,7 +98,8 @@ char	*ft_record(char *s, int x)
 	int		i;
 
 	i = 0;
-	re = (char *)malloc(x + 1);
+	if (!(re = (char *)malloc(x + 1)))
+		ft_exit("Error of malloc");
 	re[x] = 0;
 	while (s[i])
 	{
@@ -126,7 +127,8 @@ int		map_type(char **s, int y, t_data_cub *data)
 	data->plr.map_x = x;
 	while (s[j++])
 		i++;
-	data->map = (char**)malloc(sizeof(char*) * (i + 1));
+	if (!(data->map = (char**)malloc(sizeof(char*) * (i + 1))))
+		ft_exit("Error of malloc");
 	data->map[i] = NULL;
 	i = 0;
 	while (s[y])

@@ -34,7 +34,7 @@ int		ft_key(int keycode, t_data_cub *data)
 {
 	float	step;
 
-	step = 0.5;
+	step = 0.4;
 	if (keycode == 53)
 	{
 		mlx_destroy_window(data->mlx, data->win);

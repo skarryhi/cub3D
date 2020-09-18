@@ -41,7 +41,8 @@ void		green_ray(t_data_cub *data)
 	float	green_x;
 	float	green_y;
 
-	if (data->plr.map_x * 10 < data->r1 / 2 && data->plr.map_y * 10 < data->r2 / 2)
+	if (data->plr.map_x * 10 < data->r1 / 2 &&\
+		data->plr.map_y * 10 < data->r2 / 2)
 	{
 		green_x = SCALE * data->plr.mx + 11;
 		green_y = SCALE * data->plr.my + 11;
