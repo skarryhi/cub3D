@@ -57,6 +57,7 @@ typedef struct	s_player
 	float		dirx;
 	float		mx;
 	float		my;
+	int			count_sp;
 	sprite_list	*sp;
 }				player;
 
@@ -119,5 +120,7 @@ void		get_all_texture(data_cub *data, void *mlx, txt *txt);
 int			ft_key_exit(void);
 void		return_ray(data_cub *data, float c, int i, float a);
 void		new_sprite(data_cub *data);
+void		cleaning_lst(data_cub *data);
+int			pix_for_sp(pix *s, float h, float w);
 
 #endif

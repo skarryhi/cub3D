@@ -12,6 +12,45 @@
 
 #include "cub3d.h"
 
+int			finder_lst(data_cub data, int y, int x, char c)
+{
+	sprite_list	*counter;
+
+	counter = data.plr.sp;
+	while (counter)
+	{
+		if (counter->x == x && counter->y == y)
+		{
+			// printf("[%d%d]%f", counter->x, counter->y, counter->w);
+			if ( c == 'h')
+				return (counter->h);
+			if ( c == 'w')
+				return (counter->w);
+		}
+		else
+			counter = counter->next;
+	}
+	return (0);
+}
+
+void		plus_w(data_cub *data, int y, int x)
+{
+	sprite_list	*counter;
+
+	counter = data->plr.sp;
+	while (counter)
+	{
+		if (counter->x == x && counter->y == y)
+		{
+			counter->w++;
+			return ;
+		}
+		else
+			counter = counter->next;
+	}
+
+}
+
 void		new_sprite(data_cub *data)
 {
 	sprite_list	*sp;
@@ -22,9 +61,7 @@ void		new_sprite(data_cub *data)
 	{
 		if (counter->x == (int)data->plr.mx && counter->y == (int)data->plr.my)
 		{
-			if (counter->w < counter->h)
-				counter->w++;
-			printf("[%d%d]%f", counter->x, counter->y, counter->w);
+			// printf("[%d%d]%f", counter->x, counter->y, counter->w);
 			return ;
 		}
 		if (counter->next == NULL)
@@ -47,57 +84,57 @@ void		new_sprite(data_cub *data)
 		counter->next = sp;
 }
 
-// void		put_sprite(data_cub *data, int i, float c, float a)
-// {
-// 	int		o;
-// 	int		y;
-// 	int		h;
-// 	float	l_cout;
+void		put_sprite(data_cub *data, int i, int l_y, int l_x)
+{
+	int		o;
+	int		y;
+	int		h;
+	float	h_cout;
 
-// 	if ((c * cos(a - data->plr.dirx)) < 1)
-// 		data->l = (data->r2);
-// 	else
-// 		data->l = (data->r2) / (c * cos(a - data->plr.dirx));
-// 	y = (data->r2 / 2) + (data->l / 2);
-// 	l_cout = data->l;
-// 	h = data->l;
-// 	while (l_cout > 0)
-// 	{
-// 		o = 3342130;//sprite_wall(&*data, h);
-// 		my_mlx_pixel_put(&data->img, i, y, o);
-// 		y--;
-// 		h--;
-// 		l_cout--;
-// 	}
-// }
+	h = finder_lst(*data, l_y, l_x, 'h');
+	if (finder_lst(*data, l_y, l_x, 'w') < h)
+	{
+		plus_w(&*data, l_y, l_x);
+		y = (data->r2 / 2) + (h / 2);
+		h_cout = h;
+		while (h_cout > 0)
+		{
+			o = pix_for_sp(&data->txt.sp, (h_cout * 100 / h),\
+				(finder_lst(*data, l_y, l_x, 'w') * 100 / h));
+			if (o != 0x00fffb)
+				my_mlx_pixel_put(&data->img, i, y, o);
+			y--;
+			h -= 0;
+			h_cout--;
+		}
+	}
+}
 
-// void		return_ray(data_cub *data, float c, int i, float a)
-// {
-// 	float	dist_fr_wall;
-// 	float	depth;
-// 	float	place;
+void		return_ray(data_cub *data, float c, int i, float a)
+{
+	float	dist_fr_wall;
+	float	depth;
 
-// 	dist_fr_wall = c;
-// 	depth = 0.01;
-// 	while (data->plr.count_sp > 0)
-// 	{
-// 		data->plr.mx = data->plr.x + dist_fr_wall * cos(a);
-// 		data->plr.my = data->plr.y + dist_fr_wall * sin(a);
-// 		if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
-// 		{
-// 			data->plr.count_sp--;
-// 			place = sqrt(pow(data->plr.x - (int)(data->plr.mx), 2) +\
-// 					pow(data->plr.y - (int)(data->plr.my), 2));
-// 			put_sprite(&*data, i, place, a);
-// 			while (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
-// 			{
-// 				data->plr.mx = data->plr.x + dist_fr_wall * cos(a);
-// 				data->plr.my = data->plr.y + dist_fr_wall * sin(a);
-// 				dist_fr_wall -= 0.01;
-// 				depth += 0.01;
-// 			}
-// 			i++;
-// 		}
-// 		dist_fr_wall -= 0.01;
-// 	}
-// }
+	dist_fr_wall = c;
+	depth = 0.01;
+	while (data->plr.count_sp > 0)
+	{
+		data->plr.mx = data->plr.x + dist_fr_wall * cos(a);
+		data->plr.my = data->plr.y + dist_fr_wall * sin(a);
+		if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
+		{
+			data->plr.count_sp--;
+			// if ((int)data->plr.my != (int)data->plr.y && (int)data->plr.mx != (int)data->plr.x)
+				put_sprite(&*data, i, (int)data->plr.my, (int)data->plr.mx);
+			while (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
+			{
+				data->plr.mx = data->plr.x + dist_fr_wall * cos(a);
+				data->plr.my = data->plr.y + dist_fr_wall * sin(a);
+				dist_fr_wall -= 0.01;
+				depth += 0.01;
+			}
+			i += 0;
+		}
+		dist_fr_wall -= 0.01;
+	}
+}
