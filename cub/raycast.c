@@ -58,7 +58,7 @@ float		ray_growth(t_data_cub *data, float *c, int i, float a)
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
 	{
 		data->plr.count_sp++;
-		new_sprite(&*data);
+		new_sprite(&*data, i);
 		while (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
 		{
 			data->plr.mx = data->plr.x + *c * cos(a);

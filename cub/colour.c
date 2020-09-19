@@ -102,6 +102,7 @@ void			put_map(t_data_cub *data, t_pix *img)
 {
 	put_floor_ceiling(&*data, 0, 0);
 	put_ray(&*data, 0, 0);
+	put_zerro_sp(&*data);
 	cleaning_lst(&*data);
 	if (data->plr.map_x * 10 < data->r1 / 2 &&\
 		data->plr.map_y * 10 < data->r2 / 2)

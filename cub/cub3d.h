@@ -49,6 +49,8 @@ typedef struct			s_sp_list
 	float				h;
 	float				w;
 	float				s;
+	int					left;
+	int					i_end;
 	struct s_sp_list	*next;
 }						t_sprite_list;
 
@@ -60,8 +62,8 @@ typedef struct			s_player
 	float				mx;
 	float				my;
 	int					count_sp;
-	int					map_x;
 	int					map_y;
+	int					map_x;
 	t_sprite_list		*sp;
 }						t_player;
 
@@ -124,10 +126,12 @@ void					get_all_texture(t_data_cub *data,\
 void					get_one_texture(void *mlx, t_pix *n, char *no);
 int						ft_key_exit(void);
 void					return_ray(t_data_cub *data, float c, int i, float a);
-void					new_sprite(t_data_cub *data);
+void					new_sprite(t_data_cub *data, int left);
 void					cleaning_lst(t_data_cub *data);
 int						pix_for_sp(t_pix *s, float h, float w);
-void					create_lst(t_data_cub *data, t_sprite_list *counter);
+void					create_lst(t_data_cub *data, t_sprite_list *counter, int left);
 void					green_ray(t_data_cub *data);
+void					save(t_data_cub *data);
+void					put_zerro_sp(t_data_cub *data);
 
 #endif

@@ -23,6 +23,10 @@ int		main(int argc, char **argv)
 	errno = 0;
 	if (argc > 3 || argc < 2)
 		ft_exit("Wrong number of arguments");
+	if (argc == 3 && ft_strncmp(argv[2], "--save", 7) != 0)
+		ft_exit("Unknown argument");
+	else if (argc == 3)
+		save(&data);
 	z_map = map_to_lst(argv[1]);
 	map_lst_to_mas(z_map, &map);
 	data_init(&data);

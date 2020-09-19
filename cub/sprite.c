@@ -25,6 +25,8 @@ int			finder_lst(t_data_cub data, int y, int x, char c)
 				return (counter->h);
 			if (c == 'w')
 				return (counter->w);
+			if (c == 'l')
+				return (counter->left);
 		}
 		else
 			counter = counter->next;
@@ -41,6 +43,8 @@ void		plus_w(t_data_cub *data, int y, int x, int z)
 	{
 		if (counter->x == x && counter->y == y)
 		{
+			if (counter->left)
+				counter->i++;
 			counter->w = counter->w + 1 + z;
 			return ;
 		}
@@ -49,13 +53,13 @@ void		plus_w(t_data_cub *data, int y, int x, int z)
 	}
 }
 
-void		new_sprite(t_data_cub *data)
+void		new_sprite(t_data_cub *data, int left)
 {
 	t_sprite_list	*counter;
 
 	counter = data->plr.sp;
-	if ((sqrt(pow(data->plr.x - data->plr.mx, 2) + \
-			pow(data->plr.y - data->plr.my, 2))) < 0.5)
+	if ((sqrt(pow(data->plr.x - 0.5 - (int)data->plr.mx, 2) + \
+			pow(data->plr.y - 0.5 - (int)data->plr.my, 2))) < 0.8)
 		return ;
 	while (counter)
 	{
@@ -65,7 +69,7 @@ void		new_sprite(t_data_cub *data)
 			break ;
 		counter = counter->next;
 	}
-	create_lst(&*data, counter);
+	create_lst(&*data, counter, left);
 }
 
 void		put_sprite(t_data_cub *data, int i, int l_y, int l_x)
@@ -78,8 +82,11 @@ void		put_sprite(t_data_cub *data, int i, int l_y, int l_x)
 	h = finder_lst(*data, l_y, l_x, 'h');
 	if (finder_lst(*data, l_y, l_x, 'w') < h)
 	{
-		if (i == 0)
-			plus_w(&*data, l_y, l_x, finder_lst(*data, l_y, l_x, 'h') / 2);
+		if (finder_lst(*data, l_y, l_x, 'l'))
+		{
+			plus_w(&*data, l_y, l_x, 0);
+			return ;
+		}
 		else
 			plus_w(&*data, l_y, l_x, 0);
 		y = (data->r2 / 2) + (h / 2);
