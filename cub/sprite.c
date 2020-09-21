@@ -44,7 +44,7 @@ void		plus_w(t_data_cub *data, int y, int x, int z)
 		if (counter->x == x && counter->y == y)
 		{
 			if (counter->left)
-				counter->i++;
+				counter->i_end++;
 			counter->w = counter->w + 1 + z;
 			return ;
 		}
@@ -76,7 +76,7 @@ void		put_sprite(t_data_cub *data, int i, int l_y, int l_x)
 {
 	int		o;
 	int		y;
-	int		h;
+	float	h;
 	float	h_cout;
 
 	h = finder_lst(*data, l_y, l_x, 'h');
@@ -98,7 +98,6 @@ void		put_sprite(t_data_cub *data, int i, int l_y, int l_x)
 			if (o != 0x00fffb)
 				my_mlx_pixel_put(&data->img, i, y, o);
 			y--;
-			h -= 0;
 			h_cout--;
 		}
 	}

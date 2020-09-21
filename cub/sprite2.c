@@ -67,22 +67,23 @@ void		print_zerro_sp(t_sprite_list *counter, t_data_cub *data)
 	int		o;
 	int		y;
 	float	h_cout;
+	int		i_copy;
 
-	while (counter->i >= 0)
+	i_copy = counter->i_end;
+	while (counter->i_end > 0)
 	{
 		y = (data->r2 / 2) + (counter->h / 2);
 		h_cout = counter->h;
 		while (h_cout > 0)
 		{
-			printf("[%d|%f]", counter->i, counter->w);
 			o = pix_for_sp(&data->txt.sp, (h_cout * 100 / counter->h),\
-				(counter->i) * 100 / counter->h);
-			// if (o != 0x00fffb)
-			// 	my_mlx_pixel_put(&data->img, counter->i, y, o);
+				(counter->i_end + (counter->h - i_copy)) * 100 / counter->h);
+			if (o != 0x00fffb)
+				my_mlx_pixel_put(&data->img, counter->i_end, y, o);
 			y--;
 			h_cout--;
 		}
-		counter->i--;
+		counter->i_end--;
 	}
 }
 
