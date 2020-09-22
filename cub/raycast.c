@@ -37,7 +37,7 @@ void		put_wall(t_data_cub *data, int x_tex, float c, float a)
 	y_tex = (data->r2 / 2) + (data->l / 2) - 1;
 	if (y_tex > data->r2)
 	{
-		y_tex = data->r2;
+		y_tex = data->r2 - 1;
 		point = (data->l / 2) + (data->r2 / 2);
 	}
 	else
@@ -66,6 +66,8 @@ float		ray_growth(t_data_cub *data, float *c, int i, float a)
 			*c += 0.01;
 		}
 	}
+	if (data->plr.map_x < (int)data->plr.mx || data->plr.map_y < (int)data->plr.my)
+		exit(0) ;
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '1' ||\
 		data->map[(int)data->plr.my][(int)data->plr.mx] == ' ')
 	{
@@ -85,7 +87,7 @@ void		put_ray(t_data_cub *data, int i, float c)
 	a = data->plr.dirx - M_PI / 6;
 	data->plr.mx = 0;
 	data->plr.my = 0;
-	while (i <= data->r1)
+	while (i < data->r1)
 	{
 		data->plr.count_sp = 0;
 		c_break = 1;

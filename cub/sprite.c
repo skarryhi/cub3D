@@ -59,7 +59,7 @@ void		new_sprite(t_data_cub *data, int left)
 
 	counter = data->plr.sp;
 	if ((sqrt(pow(data->plr.x - 0.5 - (int)data->plr.mx, 2) + \
-			pow(data->plr.y - 0.5 - (int)data->plr.my, 2))) < 0.8)
+			pow(data->plr.y - 0.5 - (int)data->plr.my, 2))) < 1.3)
 		return ;
 	while (counter)
 	{
