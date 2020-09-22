@@ -68,6 +68,8 @@ void	data_check(t_data_cub data)
 
 int		cardinal_type(char *s, t_data_cub *data)
 {
+	while (*s == ' ')
+		s++;
 	if (ft_strncmp(s, "NO", 2) == 0)
 		check_ex_str(&data->no, s + 3);
 	else if (ft_strncmp(s, "SO", 2) == 0)

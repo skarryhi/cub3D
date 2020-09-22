@@ -32,7 +32,8 @@ int		main(int argc, char **argv)
 	data_check(data);
 	data.mlx = mlx_init();
 	all_paint(&data, &data.img, data.mlx);
-	save(&data);
+	if (argc == 3)
+		save(&data);
 	mlx_hook(data.win, 2, 0, ft_key, &data);
 	mlx_hook(data.win, 17, 0, ft_key_exit, NULL);
 	mlx_loop(data.mlx);

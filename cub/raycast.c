@@ -66,8 +66,6 @@ float		ray_growth(t_data_cub *data, float *c, int i, float a)
 			*c += 0.01;
 		}
 	}
-	if (data->plr.map_x < (int)data->plr.mx || data->plr.map_y < (int)data->plr.my)
-		exit(0) ;
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '1' ||\
 		data->map[(int)data->plr.my][(int)data->plr.mx] == ' ')
 	{

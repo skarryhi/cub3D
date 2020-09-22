@@ -80,6 +80,8 @@ void		check_all_sim(char **m, int y, int x)
 
 void		check_ex_str(char **s, char *s2)
 {
+	while (*s2 == ' ')
+		s2++;
 	if (*s == NULL)
 		*s = s2;
 	else

@@ -89,16 +89,14 @@ void		put_sprite(t_data_cub *data, int i, int l_y, int l_x)
 		}
 		else
 			plus_w(&*data, l_y, l_x, 0);
-		y = (data->r2 / 2) + (h / 2);
+		y = (data->r2 / 2) + (h / 2) + 1;
 		h_cout = h;
-		while (h_cout > 0)
+		while (h_cout > 0 && y--)
 		{
-			o = pix_for_sp(&data->txt.sp, (h_cout * 100 / h),\
+			o = pix_for_sp(&data->txt.sp, (h_cout-- * 100 / h),\
 				(finder_lst(*data, l_y, l_x, 'w') * 100 / h));
 			if (o != 0x00fffb)
 				my_mlx_pixel_put(&data->img, i, y, o);
-			y--;
-			h_cout--;
 		}
 	}
 }

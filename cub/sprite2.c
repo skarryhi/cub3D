@@ -28,7 +28,8 @@ void		create_lst(t_data_cub *data, t_sprite_list *counter, int left)
 	sp->w = 0;
 	sp->x = data->plr.mx;
 	sp->y = data->plr.my;
-	sp->s = sqrt(pow(data->plr.x - 0.5 - (int)sp->x, 2) + pow(data->plr.y - 0.5 - (int)sp->y, 2));
+	sp->s = sqrt(pow(data->plr.x - 0.5 - (int)sp->x, 2) +
+			pow(data->plr.y - 0.5 - (int)sp->y, 2));
 	if (sp->s < 0.8)
 		sp->h = (data->r2);
 	else
@@ -97,7 +98,6 @@ void		put_zerro_sp(t_data_cub *data)
 		if (counter->left == 1)
 		{
 			print_zerro_sp(counter, &*data);
-			// write(1, "tut\n", 4);
 		}
 		counter = counter->next;
 	}
