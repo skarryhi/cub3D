@@ -44,7 +44,7 @@ void		put_wall(t_data_cub *data, int x_tex, float c, float a)
 		point = data->l;
 	min_a = trgb_def_wall(a);
 	data_l_copy = data->l;
-	while (data_l_copy-- > 0 && y_tex > 0)
+	while (data_l_copy-- >= 0 && y_tex > 0)
 	{
 		o = trgb_wall(&*data, min_a, point--);
 		my_mlx_pixel_put(&data->img, x_tex, y_tex--, o);

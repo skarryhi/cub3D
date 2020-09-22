@@ -52,7 +52,7 @@ void	save(t_data_cub *data)
 	bmppad[1] = (unsigned char)0;
 	bmppad[2] = (unsigned char)0;
 	fd = open("screen.bmp", O_WRONLY | O_CREAT, S_IRWXU, S_IRWXG);
-	create_head(&*data, fd, &pad);
+	create_head(data, fd, &pad);
 	while (--data->r2 >= 0)
 	{
 		x = -1;

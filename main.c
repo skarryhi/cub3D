@@ -25,8 +25,6 @@ int		main(int argc, char **argv)
 		ft_exit("Wrong number of arguments");
 	if (argc == 3 && ft_strncmp(argv[2], "--save", 7) != 0)
 		ft_exit("Unknown argument");
-	else if (argc == 3)
-		save(&data);
 	z_map = map_to_lst(argv[1]);
 	map_lst_to_mas(z_map, &map);
 	data_init(&data);
@@ -34,6 +32,7 @@ int		main(int argc, char **argv)
 	data_check(data);
 	data.mlx = mlx_init();
 	all_paint(&data, &data.img, data.mlx);
+	save(&data);
 	mlx_hook(data.win, 2, 0, ft_key, &data);
 	mlx_hook(data.win, 17, 0, ft_key_exit, NULL);
 	mlx_loop(data.mlx);

@@ -16,6 +16,7 @@ void	ft_exit(char *s)
 {
 	if (s)
 	{
+		ft_putstr_fd("Error:\n", 1);
 		ft_putstr_fd(s, 1);
 		ft_putchar_fd('\n', 1);
 	}
@@ -26,6 +27,7 @@ void	check_errno(void)
 {
 	if (errno != 0)
 	{
+		ft_putstr_fd("Error:\n", 1);
 		perror("Program stopped");
 		exit(errno);
 	}

@@ -16,7 +16,8 @@ void	pushes(t_data_cub *data, float step, float a)
 {
 	data->plr.x = data->plr.x + step * cos(data->plr.dirx - a);
 	data->plr.y = data->plr.y + step * sin(data->plr.dirx - a);
-	if (data->map[(int)data->plr.y][(int)data->plr.x] == '1')
+	if (data->map[(int)data->plr.y][(int)data->plr.x] == '1' ||\
+		data->map[(int)data->plr.y][(int)data->plr.x] == ' ')
 	{
 		data->plr.x = data->plr.x - step * cos(data->plr.dirx - a);
 		data->plr.y = data->plr.y - step * sin(data->plr.dirx - a);
