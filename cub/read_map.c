@@ -65,7 +65,7 @@ t_list	*map_to_lst(const char *s)
 	int		fd;
 
 	line = ft_strnstr(s, ".cub", -1);
-	if (*(line + 4) != '\0' || line == NULL)
+	if (line == NULL || *(line + 4) != '\0')
 		ft_exit("Error file extension");
 	fd = open(s, O_RDONLY);
 	check_errno();

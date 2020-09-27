@@ -25,8 +25,8 @@ int			trgb_def_wall(float a)
 void		put_wall(t_data_cub *data, int x_tex, float c, float a)
 {
 	int		o;
-	int		y_tex;
-	int		point;
+	float		y_tex;
+	float		point;
 	float	min_a;
 	float	data_l_copy;
 
@@ -63,7 +63,7 @@ float		ray_growth(t_data_cub *data, float *c, int i, float a)
 		{
 			data->plr.mx = data->plr.x + *c * cos(a);
 			data->plr.my = data->plr.y + *c * sin(a);
-			*c += 0.01;
+			*c += 0.005;
 		}
 	}
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '1' ||\
@@ -73,7 +73,7 @@ float		ray_growth(t_data_cub *data, float *c, int i, float a)
 		return (0);
 	}
 	green_ray(&*data);
-	*c += 0.01;
+	*c += 0.005;
 	return (1);
 }
 

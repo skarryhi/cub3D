@@ -1,4 +1,4 @@
-NAME = cub3d
+NAME = cub3D
 HEADERS = ./cub/libcub.h
 CFLAGS = -Wall -Werror -Wextra
 

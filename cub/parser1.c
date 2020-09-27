@@ -16,8 +16,12 @@ int		r_type(char *s, int *r1, int *r2)
 {
 	if (*r1 == -1 && *r2 == -1)
 	{
+		while (*s == ' ')
+			s++;
 		*r1 = ft_atoi(s);
 		while (ft_isdigit(*s))
+			s++;
+		while (*s == ' ')
 			s++;
 		*r2 = ft_atoi(s);
 		s++;
@@ -28,9 +32,9 @@ int		r_type(char *s, int *r1, int *r2)
 	}
 	else
 		ft_exit("Invalid map");
-	if (*r1 <= -1 || *r2 <= -1)
+	if (*r1 <= 1 || *r2 <= 1)
 		ft_exit("Invalid map");
-	if (*r1 < 640 || *r2 < 360)
+	if (*r1 < 10 || *r2 < 10)
 		ft_exit("Very small map");
 	if (*r1 > 2560 || *r2 > 1440)
 	{
@@ -133,6 +137,8 @@ int		map_type(char **s, int y, t_data_cub *data)
 	i = 0;
 	while (s[y])
 	{
+		if (!s[y + 1] && s[y][0])
+			ft_exit("Invalid map");
 		data->map[i] = s[y];
 		if (ft_strlen(data->map[i]) < (size_t)x)
 			data->map[i] = ft_record(data->map[i], x);

@@ -61,7 +61,7 @@ void		check_all_sim(char **m, int y, int x)
 		while (m[y][x])
 			if (m[y][x++] == '1')
 				flag = 1;
-		if (!flag)
+		if ((!flag && m[y + 1]))
 			ft_exit("Invalid map");
 		x = 0;
 		while (m[y][x])

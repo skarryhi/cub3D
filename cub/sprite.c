@@ -107,7 +107,7 @@ void		return_ray(t_data_cub *data, float c, int i, float a)
 	float	depth;
 
 	dist_fr_wall = c;
-	depth = 0.01;
+	depth = 0.005;
 	while (data->plr.count_sp > 0)
 	{
 		data->plr.mx = data->plr.x + dist_fr_wall * cos(a);
@@ -119,12 +119,12 @@ void		return_ray(t_data_cub *data, float c, int i, float a)
 			{
 				data->plr.mx = data->plr.x + dist_fr_wall * cos(a);
 				data->plr.my = data->plr.y + dist_fr_wall * sin(a);
-				dist_fr_wall -= 0.01;
-				depth += 0.01;
+				dist_fr_wall -= 0.005;
+				depth += 0.005;
 			}
 			put_sprite(&*data, i, (int)(data->plr.y + (dist_fr_wall + 0.8)\
 				* sin(a)), (int)(data->plr.x + (dist_fr_wall + 0.8) * cos(a)));
 		}
-		dist_fr_wall -= 0.01;
+		dist_fr_wall -= 0.005;
 	}
 }

@@ -119,7 +119,7 @@ void					put_map(t_data_cub *data, t_pix *img);
 void					all_paint(t_data_cub *data, t_pix *img, void *mlx);
 void					put_ray(t_data_cub *data, int i, float c);
 void					my_mlx_pixel_put(t_pix *data, int x, int y, int color);
-int						trgb_wall(t_data_cub *data, float a, int y);
+int						trgb_wall(t_data_cub *data, float a, float y);
 int						getpixelcolor(t_pix *img, int x, int y);
 void					get_all_texture(t_data_cub *data,\
 										void *mlx, t_txt *txt);
