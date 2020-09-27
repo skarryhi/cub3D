@@ -41,17 +41,17 @@ int		ft_key(int keycode, t_data_cub *data)
 		mlx_destroy_window(data->mlx, data->win);
 		exit(0);
 	}
-	if (keycode == 123)
+	if (keycode == 0)
 		pushes(&*data, step, (M_PI / 2));
-	if (keycode == 124)
+	if (keycode == 2)
 		pushes(&*data, step, -(M_PI / 2));
 	if (keycode == 13)
 		pushes(&*data, step, 0);
 	if (keycode == 1)
 		pushes(&*data, -step, 0);
-	if (keycode == 2)
+	if (keycode == 124)
 		pushes_angl(&*data, M_PI / 16);
-	if (keycode == 0)
+	if (keycode == 123)
 		pushes_angl(&*data, -(M_PI / 16));
 	return (0);
 }
