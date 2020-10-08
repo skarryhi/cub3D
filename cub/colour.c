@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_colour.c                                        :+:      :+:    :+:   */
+/*   colour.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skarry <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:55:34 by skarry            #+#    #+#             */
-/*   Updated: 2020/08/17 18:55:38 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/08 17:21:14 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,11 @@ void			put_map(t_data_cub *data, t_pix *img)
 {
 	put_floor_ceiling(&*data, 0, 0);
 	put_ray(&*data, 0, 0);
-	put_zerro_sp(&*data);
+	if (data->plr.sp)
+	{
+		sort_sprite(data);
+		put_sprite(&*data);
+	}
 	cleaning_lst(&*data);
 	if (data->plr.map_x * 10 < data->r1 / 2 &&\
 		data->plr.map_y * 10 < data->r2 / 2)

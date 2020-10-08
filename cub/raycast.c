@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skarry <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 12:37:06 by skarry            #+#    #+#             */
-/*   Updated: 2020/08/31 12:37:09 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/08 19:40:55 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int			trgb_def_wall(float a)
+float			trgb_def_wall(double a)
 {
-	if (a < 0)
-		a -= M_PI;
-	a = fabs(a);
-	while (a > 2 * M_PI)
+	while (a < - M_PI / 2)
+		a += 2 * M_PI;
+	while (a > M_PI / 2)
 		a -= 2 * M_PI;
 	return (a);
 }
 
-void		put_wall(t_data_cub *data, int x_tex, float c, float a)
+void		put_wall(t_data_cub *data, int x_tex, float c, double a)
 {
 	int		o;
 	float		y_tex;
@@ -51,14 +50,13 @@ void		put_wall(t_data_cub *data, int x_tex, float c, float a)
 	}
 }
 
-float		ray_growth(t_data_cub *data, float *c, int i, float a)
+float		ray_growth(t_data_cub *data, float *c, int i, double a)
 {
 	data->plr.mx = data->plr.x + *c * cos(a);
 	data->plr.my = data->plr.y + *c * sin(a);
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
 	{
-		data->plr.count_sp++;
-		new_sprite(&*data, i);
+		new_sprite(&*data, a, i);
 		while (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
 		{
 			data->plr.mx = data->plr.x + *c * cos(a);
@@ -69,6 +67,7 @@ float		ray_growth(t_data_cub *data, float *c, int i, float a)
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '1' ||\
 		data->map[(int)data->plr.my][(int)data->plr.mx] == ' ')
 	{
+		data->plr.dis[i] = *c;
 		put_wall(&*data, i, *c, a);
 		return (0);
 	}
@@ -79,12 +78,13 @@ float		ray_growth(t_data_cub *data, float *c, int i, float a)
 
 void		put_ray(t_data_cub *data, int i, float c)
 {
-	float	a;
+	double	a;
 	int		c_break;
 
 	a = data->plr.dirx - M_PI / 6;
 	data->plr.mx = 0;
 	data->plr.my = 0;
+	data->plr.dis = (float *)malloc((sizeof(float) * data->r1));
 	while (i < data->r1)
 	{
 		data->plr.count_sp = 0;
@@ -92,8 +92,6 @@ void		put_ray(t_data_cub *data, int i, float c)
 		c = 0;
 		while (c_break)
 			c_break = ray_growth(&*data, &c, i, a);
-		if (data->plr.count_sp)
-			return_ray(&*data, c, i, a);
 		i++;
 		a = a + M_PI / (3 * data->r1);
 	}

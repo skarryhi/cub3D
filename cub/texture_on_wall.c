@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_on_wall.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skarry <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:47:43 by skarry            #+#    #+#             */
-/*   Updated: 2020/09/03 17:47:46 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/08 18:17:46 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			pix_for_w_e(t_data_cub *data, t_pix *s, float y)
 	return (getpixelcolor(&*s, x1, y1));
 }
 
-int			trgb_wall(t_data_cub *data, float a, float y)
+int			trgb_wall(t_data_cub *data, double a, float y)
 {
 	if (data->map[(int)data->plr.my][(int)(data->plr.mx - 0.005)] != '1' &&\
 		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.005)] == '1' &&\

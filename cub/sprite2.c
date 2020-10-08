@@ -3,37 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   sprite2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skarry <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:45:15 by skarry            #+#    #+#             */
-/*   Updated: 2020/09/18 10:45:18 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/08 19:44:10 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		create_lst(t_data_cub *data, t_sprite_list *counter, int left)
+void		create_lst(t_data_cub *data, t_sprite_list *counter, double a, int i)
 {
 	t_sprite_list	*sp;
 
 	if (!(sp = (t_sprite_list *)malloc(sizeof(t_sprite_list))))
 		ft_exit("Error of malloc");
-	if (!left)
-	{
-		sp->left = 1;
-		sp->i_end = 0;
-	}
-	else
-		sp->left = 0;
-	sp->w = 0;
 	sp->x = data->plr.mx;
 	sp->y = data->plr.my;
 	sp->s = sqrt(pow(data->plr.x - 0.5 - (int)sp->x, 2) +
 			pow(data->plr.y - 0.5 - (int)sp->y, 2));
-	if (sp->s < 0.8)
-		sp->h = (data->r2);
-	else
-		sp->h = (data->r2) / sp->s;
+	sp->h = data->r2 / sp->s;
+	sp->i_mid = atan2((int)(data->plr.my) + 0.5 - data->plr.y, (int)(data->plr.mx) + 0.5 - data->plr.x);
+	a = trgb_def_wall(a);
+		sp->i_mid = trgb_def_wall(sp->i_mid);
+	sp->i_middle = i - (a - sp->i_mid) / (M_PI / (3 * data->r1));
+	sp->i_start = sp->i_middle - sp->h / 2;
+	sp->i_end = sp->i_middle + sp->h / 2;
+	// printf("%d[%d]%d a:%f mid:%f i:%d fabs:%f\n", sp->i_start,\
+	// sp->i_middle, sp->i_end, a, sp->i_mid,i, a - sp->i_mid);
 	sp->next = NULL;
 	if (data->plr.sp == NULL)
 		data->plr.sp = sp;
@@ -61,44 +58,4 @@ int			pix_for_sp(t_pix *s, float h, float w)
 	x1 = s->width / 100 * w;
 	y1 = s->height / 100 * h;
 	return (getpixelcolor(&*s, x1, y1));
-}
-
-void		print_zerro_sp(t_sprite_list *counter, t_data_cub *data)
-{
-	int		o;
-	int		y;
-	float	h_cout;
-	int		i_copy;
-
-	i_copy = counter->i_end;
-	while (counter->i_end > 0)
-	{
-		y = (data->r2 / 2) + (counter->h / 2);
-		h_cout = counter->h;
-		while (h_cout > 0)
-		{
-			o = pix_for_sp(&data->txt.sp, (h_cout * 100 / counter->h),\
-				(counter->i_end + (counter->h - i_copy)) * 100 / counter->h);
-			if (o != 0x00fffb)
-				my_mlx_pixel_put(&data->img, counter->i_end, y, o);
-			y--;
-			h_cout--;
-		}
-		counter->i_end--;
-	}
-}
-
-void		put_zerro_sp(t_data_cub *data)
-{
-	t_sprite_list	*counter;
-
-	counter = data->plr.sp;
-	while (counter)
-	{
-		if (counter->left == 1)
-		{
-			print_zerro_sp(counter, &*data);
-		}
-		counter = counter->next;
-	}
 }
