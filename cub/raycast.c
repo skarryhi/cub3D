@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 12:37:06 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/09 09:58:44 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 13:49:37 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,9 @@ void		put_wall(t_data_cub *data, int x_tex, float c, float a)
 	int		o;
 	float	y_tex;
 	float	point;
-	float	min_a;
 	float	data_l_copy;
 
-	if ((c * cos(a - data->plr.dirx)) < 0.01)
-		data->l = (data->r2) / 0.01;
-	else
-		data->l = (data->r2) / (c * cos(a - data->plr.dirx));
+	data->l = (data->r2) / (c * cos(a - data->plr.dirx));
 	y_tex = (data->r2 / 2) + (data->l / 2) - 1;
 	if (y_tex > data->r2)
 	{
@@ -41,11 +37,11 @@ void		put_wall(t_data_cub *data, int x_tex, float c, float a)
 	}
 	else
 		point = data->l;
-	min_a = trgb_def_wall(a);
+	a = trgb_def_wall(a);
 	data_l_copy = data->l;
 	while (data_l_copy-- >= 0 && y_tex > 0)
 	{
-		o = trgb_wall(&*data, min_a, point--);
+		o = trgb_wall(&*data, point--);
 		my_mlx_pixel_put(&data->img, x_tex, y_tex--, o);
 	}
 }

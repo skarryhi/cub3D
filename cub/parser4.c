@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:10:49 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/08 18:20:27 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 13:31:15 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void		check_one_plr(t_data_cub *data, int y, int x)
 		x = 0;
 		y++;
 	}
+	if (flag)
+		ft_exit("Invalid map");
 }
 
 void		check_all_sim(char **m, int y, int x)
