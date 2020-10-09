@@ -6,13 +6,13 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:45:15 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/08 19:44:10 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 09:43:46 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void		create_lst(t_data_cub *data, t_sprite_list *counter, double a, int i)
+void		create_lst(t_data_cub *data, t_sprite_list *counter, float a, int i)
 {
 	t_sprite_list	*sp;
 
@@ -25,7 +25,7 @@ void		create_lst(t_data_cub *data, t_sprite_list *counter, double a, int i)
 	sp->h = data->r2 / sp->s;
 	sp->i_mid = atan2((int)(data->plr.my) + 0.5 - data->plr.y, (int)(data->plr.mx) + 0.5 - data->plr.x);
 	a = trgb_def_wall(a);
-		sp->i_mid = trgb_def_wall(sp->i_mid);
+	sp->i_mid = trgb_def_wall(sp->i_mid);
 	sp->i_middle = i - (a - sp->i_mid) / (M_PI / (3 * data->r1));
 	sp->i_start = sp->i_middle - sp->h / 2;
 	sp->i_end = sp->i_middle + sp->h / 2;
@@ -48,6 +48,8 @@ void		cleaning_lst(t_data_cub *data)
 		free(data->plr.sp);
 		data->plr.sp = nxt;
 	}
+	if (data->plr.dis)
+		free(data->plr.dis);
 }
 
 int			pix_for_sp(t_pix *s, float h, float w)

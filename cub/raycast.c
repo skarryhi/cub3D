@@ -6,26 +6,26 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 12:37:06 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/08 19:40:55 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 09:54:44 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float			trgb_def_wall(double a)
+float		trgb_def_wall(float a)
 {
-	while (a < - M_PI / 2)
+	while (a < -M_PI / 2)
 		a += 2 * M_PI;
 	while (a > M_PI / 2)
 		a -= 2 * M_PI;
 	return (a);
 }
 
-void		put_wall(t_data_cub *data, int x_tex, float c, double a)
+void		put_wall(t_data_cub *data, int x_tex, float c, float a)
 {
 	int		o;
-	float		y_tex;
-	float		point;
+	float	y_tex;
+	float	point;
 	float	min_a;
 	float	data_l_copy;
 
@@ -50,14 +50,16 @@ void		put_wall(t_data_cub *data, int x_tex, float c, double a)
 	}
 }
 
-float		ray_growth(t_data_cub *data, float *c, int i, double a)
+float		ray_growth(t_data_cub *data, float *c, int i, float a)
 {
 	data->plr.mx = data->plr.x + *c * cos(a);
 	data->plr.my = data->plr.y + *c * sin(a);
 	if (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
 	{
 		new_sprite(&*data, a, i);
-		while (data->map[(int)data->plr.my][(int)data->plr.mx] == '2')
+		data->plr.temp_x = (int)data->plr.mx;
+		data->plr.temp_y = (int)data->plr.my;
+		while (data->plr.temp_x == (int)data->plr.mx && data->plr.temp_y == (int)data->plr.my)
 		{
 			data->plr.mx = data->plr.x + *c * cos(a);
 			data->plr.my = data->plr.y + *c * sin(a);

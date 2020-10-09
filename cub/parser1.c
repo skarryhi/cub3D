@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   f_to_stuct.c                                       :+:      :+:    :+:   */
+/*   parser1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skarry <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:17:32 by skarry            #+#    #+#             */
-/*   Updated: 2020/08/16 15:17:35 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 09:40:52 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int		r_type(char *s, int *r1, int *r2)
 			s++;
 		while (*s == ' ')
 			s++;
-		*r2 = ft_atoi(s);
-		s++;
+		*r2 = ft_atoi(s++);
 		while (ft_isdigit(*s))
 			s++;
 		if (*s)
@@ -32,10 +31,8 @@ int		r_type(char *s, int *r1, int *r2)
 	}
 	else
 		ft_exit("Invalid map");
-	if (*r1 <= 1 || *r2 <= 1)
-		ft_exit("Invalid map");
 	if (*r1 < 10 || *r2 < 10)
-		ft_exit("Very small map");
+		ft_exit("Very small resolution");
 	if (*r1 > 2560 || *r2 > 1440)
 	{
 		*r1 = 2560;
@@ -139,10 +136,9 @@ int		map_type(char **s, int y, t_data_cub *data)
 	{
 		if (!s[y + 1] && s[y][0])
 			ft_exit("Invalid map");
-		data->map[i] = s[y];
+		data->map[i] = s[y++];
 		if (ft_strlen(data->map[i]) < (size_t)x)
 			data->map[i] = ft_record(data->map[i], x);
-		y++;
 		i++;
 	}
 	check_valid_map(&*data);

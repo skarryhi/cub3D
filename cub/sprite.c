@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 15:58:22 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/08 17:44:48 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 09:43:53 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ t_sprite_list	*finder_lst(t_data_cub data, int y, int x)
 	return (0);
 }
 
-t_sprite_list		*record_sprite(t_sprite_list *sp, t_sprite_list *sp2)
+t_sprite_list	*record_sprite(t_sprite_list *sp, t_sprite_list *sp2)
 {
 	t_sprite_list	*sp3;
 
 	if (!sp2)
-		{
-			if (!(sp3 = (t_sprite_list *)malloc(sizeof(t_sprite_list))))
+	{
+		if (!(sp3 = (t_sprite_list *)malloc(sizeof(t_sprite_list))))
 			ft_exit("Error of malloc");
-		}
+	}
 	else
 		sp3 = sp2;
 	sp3->x = sp->x;
@@ -50,7 +50,7 @@ t_sprite_list		*record_sprite(t_sprite_list *sp, t_sprite_list *sp2)
 	return (sp3);
 }
 
-void		sort_sprite(t_data_cub *data)
+void			sort_sprite(t_data_cub *data)
 {
 	t_sprite_list	*sp;
 	t_sprite_list	*sp_pointer;
@@ -84,7 +84,7 @@ void		sort_sprite(t_data_cub *data)
 			free(pre_pointer->next);
 			pre_pointer->next = next;
 		}
-		else 
+		else
 		{
 			next = data->plr.sp->next;
 			free(data->plr.sp);
@@ -97,14 +97,14 @@ void		sort_sprite(t_data_cub *data)
 	}
 	sp_pointer = record_sprite(data->plr.sp, sp_pointer);
 	free(data->plr.sp);
-	if(sp_pre_pointer)
+	if (sp_pre_pointer)
 		sp_pre_pointer->next = sp_pointer;
 	else
 		sp = sp_pointer;
 	data->plr.sp = sp;
 }
 
-void		new_sprite(t_data_cub *data, double a, int i)
+void			new_sprite(t_data_cub *data, float a, int i)
 {
 	t_sprite_list	*pointer;
 
@@ -123,18 +123,17 @@ void		new_sprite(t_data_cub *data, double a, int i)
 	create_lst(&*data, pointer, a, i);
 }
 
-void		put_sprite(t_data_cub *data)
+void			put_sprite(t_data_cub *data)
 {
-	int		o;
-	int		y;
-	int		i;
-	float	h_cout;
+	int				o;
+	int				y;
+	int				i;
+	float			h_cout;
 	t_sprite_list	*sp;
 
 	sp = data->plr.sp;
 	while (sp)
 	{
-		// printf("[%f]\n", sp->s);
 		i = sp->i_start;
 		if (i < 0)
 			i = 0;

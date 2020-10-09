@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 15:52:18 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/08 18:16:15 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 09:52:28 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ typedef struct			s_player
 	int					map_y;
 	int					map_x;
 	float				*dis;
+	int					temp_x;
+	int					temp_y;
 	t_sprite_list		*sp;
 }						t_player;
 
@@ -120,19 +122,19 @@ void					put_map(t_data_cub *data, t_pix *img);
 void					all_paint(t_data_cub *data, t_pix *img, void *mlx);
 void					put_ray(t_data_cub *data, int i, float c);
 void					my_mlx_pixel_put(t_pix *data, int x, int y, int color);
-int						trgb_wall(t_data_cub *data, double a, float y);
+int						trgb_wall(t_data_cub *data, float a, float y);
 int						getpixelcolor(t_pix *img, int x, int y);
 void					get_all_texture(t_data_cub *data,\
 										void *mlx, t_txt *txt);
 void					get_one_texture(void *mlx, t_pix *n, char *no);
 int						ft_key_exit(void);
-void					new_sprite(t_data_cub *data, double a, int i);
+void					new_sprite(t_data_cub *data, float a, int i);
 void					cleaning_lst(t_data_cub *data);
 int						pix_for_sp(t_pix *s, float h, float w);
-void					create_lst(t_data_cub *data, t_sprite_list *counter, double a, int i);
+void					create_lst(t_data_cub *data, t_sprite_list *counter, float a, int i);
 void					green_ray(t_data_cub *data);
 void					save(t_data_cub *data);
-float					trgb_def_wall(double a);
+float					trgb_def_wall(float a);
 void					put_sprite(t_data_cub *data);
 void					sort_sprite(t_data_cub *data);
 
