@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:47:43 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/09 09:43:36 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 11:17:27 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,22 +46,22 @@ int			trgb_wall(t_data_cub *data, float a, float y)
 		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.005)] == '1' &&
 		data->map[(int)(data->plr.my - 0.005)][(int)data->plr.mx] == '1' &&
 		data->map[(int)(data->plr.my + 0.005)][(int)data->plr.mx] == '1')
-		return (pix_for_s_n(&*data, &data->txt.s, y));
+		return (pix_for_s_n(&*data, &data->txt.w, y));
 	else if (data->map[(int)data->plr.my][(int)(data->plr.mx - 0.005)] == '1' &&
 		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.005)] == '1' &&
 		data->map[(int)(data->plr.my - 0.005)][(int)data->plr.mx] != '1' &&
 		data->map[(int)(data->plr.my + 0.005)][(int)data->plr.mx] == '1')
-		return (pix_for_w_e(&*data, &data->txt.e, y));
+		return (pix_for_w_e(&*data, &data->txt.s, y));
 	else if (data->map[(int)data->plr.my][(int)(data->plr.mx - 0.005)] == '1' &&
 		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.005)] != '1' &&
 		data->map[(int)(data->plr.my - 0.005)][(int)data->plr.mx] == '1' &&
 		data->map[(int)(data->plr.my + 0.005)][(int)data->plr.mx] == '1')
-		return (pix_for_s_n(&*data, &data->txt.n, y));
+		return (pix_for_s_n(&*data, &data->txt.e, y));
 	else if (data->map[(int)data->plr.my][(int)(data->plr.mx - 0.005)] == '1' &&
 		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.005)] == '1' &&
 		data->map[(int)(data->plr.my - 0.005)][(int)data->plr.mx] == '1' &&
 		data->map[(int)(data->plr.my + 0.005)][(int)data->plr.mx] != '1')
-		return (pix_for_w_e(&*data, &data->txt.w, y));
+		return (pix_for_w_e(&*data, &data->txt.n, y));
 	else if (a < M_PI)
 		return (pix_for_w_e(&*data, &data->txt.e, y));
 	return (pix_for_w_e(&*data, &data->txt.w, y));

@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/18 10:45:15 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/09 10:04:11 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 11:19:00 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void			create_lst(t_data_cub *data,
 								(int)(data->plr.mx) + 0.5 - data->plr.x);
 	a = trgb_def_wall(a);
 	sp->i_mid = trgb_def_wall(sp->i_mid);
+	if (fabs(a - sp->i_mid) > 2)
+		a = a - (2 * M_PI);
 	sp->i_middle = i - (a - sp->i_mid) / (M_PI / (3 * data->r1));
 	sp->i_start = sp->i_middle - sp->h / 2;
 	sp->i_end = sp->i_middle + sp->h / 2;
-	// printf("%d[%d]%d a:%f mid:%f i:%d fabs:%f\n", sp->i_start,\
-	// sp->i_middle, sp->i_end, a, sp->i_mid,i, a - sp->i_mid);
 	sp->next = NULL;
 	if (data->plr.sp == NULL)
 		data->plr.sp = sp;
