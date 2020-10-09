@@ -6,129 +6,86 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 15:58:22 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/09 09:43:53 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 10:27:50 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_sprite_list	*finder_lst(t_data_cub data, int y, int x)
+void			find_big_sprite2(t_pt *pt)
 {
-	t_sprite_list	*pointer;
-
-	pointer = data.plr.sp;
-	while (pointer)
+	if (pt->sp_pointer->s < pt->pointer->next->s)
 	{
-		if (pointer->x == x && pointer->y == y)
-			return (pointer);
-		pointer = pointer->next;
+		pt->next = pt->pointer->next->next;
+		pt->sp_pointer = record_sprite(pt->pointer->next, pt->sp_pointer);
+		pt->pre_pointer = pt->pointer;
 	}
-	return (0);
+	pt->pointer = pt->pointer->next;
 }
 
-t_sprite_list	*record_sprite(t_sprite_list *sp, t_sprite_list *sp2)
+void			find_big_sprite(t_data_cub *data, t_pt *pt)
 {
-	t_sprite_list	*sp3;
-
-	if (!sp2)
+	pt->pointer = data->plr.sp;
+	pt->sp_pointer = record_sprite(pt->pointer, pt->sp_pointer);
+	pt->pre_pointer = NULL;
+	while (pt->pointer->next)
+		find_big_sprite2(pt);
+	if (pt->pre_pointer)
 	{
-		if (!(sp3 = (t_sprite_list *)malloc(sizeof(t_sprite_list))))
-			ft_exit("Error of malloc");
+		free(pt->pre_pointer->next);
+		pt->pre_pointer->next = pt->next;
 	}
 	else
-		sp3 = sp2;
-	sp3->x = sp->x;
-	sp3->y = sp->y;
-	sp3->h = sp->h;
-	sp3->s = sp->s;
-	sp3->w = sp->w;
-	sp3->i_start = sp->i_start;
-	sp3->i_mid = sp->i_mid;
-	sp3->i_middle = sp->i_middle;
-	sp3->i_end = sp->i_end;
-	sp3->next = NULL;
-	return (sp3);
+	{
+		pt->next = data->plr.sp->next;
+		free(data->plr.sp);
+		data->plr.sp = pt->next;
+	}
+	if (pt->sp_pre_pointer)
+		pt->sp_pre_pointer->next = pt->sp_pointer;
+	pt->sp_pre_pointer = pt->sp_pointer;
+	pt->sp_pointer = pt->sp_pointer->next;
 }
 
-void			sort_sprite(t_data_cub *data)
+void			sort_sprite(t_data_cub *data, t_pt *pt)
 {
-	t_sprite_list	*sp;
-	t_sprite_list	*sp_pointer;
-	t_sprite_list	*sp_pre_pointer;
-	t_sprite_list	*pointer;
-	t_sprite_list	*pre_pointer;
-	void			*next;
-
-	pointer = data->plr.sp;
-	sp_pointer = NULL;
-	sp_pre_pointer = NULL;
-	sp = record_sprite(pointer, sp_pointer);
-	sp_pointer = sp;
+	pt->pointer = data->plr.sp;
+	pt->sp_pointer = NULL;
+	pt->sp_pre_pointer = NULL;
+	pt->sp = record_sprite(pt->pointer, pt->sp_pointer);
+	pt->sp_pointer = pt->sp;
 	while (data->plr.sp->next)
-	{
-		pointer = data->plr.sp;
-		sp_pointer = record_sprite(pointer, sp_pointer);
-		pre_pointer = NULL;
-		while (pointer->next)
-		{
-			if (sp_pointer->s < pointer->next->s)
-			{
-				next = pointer->next->next;
-				sp_pointer = record_sprite(pointer->next, sp_pointer);
-				pre_pointer = pointer;
-			}
-			pointer = pointer->next;
-		}
-		if (pre_pointer)
-		{
-			free(pre_pointer->next);
-			pre_pointer->next = next;
-		}
-		else
-		{
-			next = data->plr.sp->next;
-			free(data->plr.sp);
-			data->plr.sp = next;
-		}
-		if (sp_pre_pointer)
-			sp_pre_pointer->next = sp_pointer;
-		sp_pre_pointer = sp_pointer;
-		sp_pointer = sp_pointer->next;
-	}
-	sp_pointer = record_sprite(data->plr.sp, sp_pointer);
+		find_big_sprite(data, pt);
+	pt->sp_pointer = record_sprite(data->plr.sp, pt->sp_pointer);
 	free(data->plr.sp);
-	if (sp_pre_pointer)
-		sp_pre_pointer->next = sp_pointer;
+	if (pt->sp_pre_pointer)
+		pt->sp_pre_pointer->next = pt->sp_pointer;
 	else
-		sp = sp_pointer;
-	data->plr.sp = sp;
+		pt->sp = pt->sp_pointer;
+	data->plr.sp = pt->sp;
 }
 
-void			new_sprite(t_data_cub *data, float a, int i)
+void			put_column(t_data_cub *data, t_sprite_list *sp, int i)
 {
-	t_sprite_list	*pointer;
+	int				o;
+	int				y;
+	float			h_cout;
 
-	pointer = data->plr.sp;
-	if ((sqrt(pow(data->plr.x - 0.5 - (int)data->plr.mx, 2) + \
-			pow(data->plr.y - 0.5 - (int)data->plr.my, 2))) < 1.3)
-		return ;
-	while (pointer)
+	y = (data->r2 / 2) + (sp->h / 2) + data->r2 / 90;
+	h_cout = sp->h;
+	while (h_cout > 0 && y)
 	{
-		if (pointer->x == (int)data->plr.mx && pointer->y == (int)data->plr.my)
-			return ;
-		if (pointer->next == NULL)
-			break ;
-		pointer = pointer->next;
+		o = pix_for_sp(&data->txt.sp, (h_cout-- * 100 / sp->h),\
+			(i - sp->i_start) * 100 / sp->h);
+		if (o != 0x00fffb)
+			my_mlx_pixel_put(&data->img, i, y, o);
+		y--;
 	}
-	create_lst(&*data, pointer, a, i);
 }
 
 void			put_sprite(t_data_cub *data)
 {
-	int				o;
-	int				y;
 	int				i;
-	float			h_cout;
 	t_sprite_list	*sp;
 
 	sp = data->plr.sp;
@@ -140,18 +97,7 @@ void			put_sprite(t_data_cub *data)
 		while (i < sp->i_end && i < data->r1)
 		{
 			if (data->plr.dis[i] > sp->s)
-			{
-				y = (data->r2 / 2) + (sp->h / 2) + data->r2 / 90;
-				h_cout = sp->h;
-				while (h_cout > 0 && y)
-				{
-					o = pix_for_sp(&data->txt.sp, (h_cout-- * 100 / sp->h),\
-						(i - sp->i_start) * 100 / sp->h);
-					if (o != 0x00fffb)
-						my_mlx_pixel_put(&data->img, i, y, o);
-					y--;
-				}
-			}
+				put_column(data, sp, i);
 			i++;
 		}
 		sp = sp->next;

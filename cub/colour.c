@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 18:55:34 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/08 17:21:14 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 10:18:37 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void			put_map(t_data_cub *data, t_pix *img)
 	put_ray(&*data, 0, 0);
 	if (data->plr.sp)
 	{
-		sort_sprite(data);
+		sort_sprite(data, &data->plr.pt);
 		put_sprite(&*data);
 	}
 	cleaning_lst(&*data);

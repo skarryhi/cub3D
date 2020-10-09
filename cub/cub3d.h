@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 15:52:18 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/09 09:52:28 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 10:18:20 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ typedef struct			s_sp_list
 	struct s_sp_list	*next;
 }						t_sprite_list;
 
+typedef struct			s_pt
+{
+	t_sprite_list		*sp;
+	t_sprite_list		*sp_pointer;
+	t_sprite_list		*sp_pre_pointer;
+	t_sprite_list		*pointer;
+	t_sprite_list		*pre_pointer;
+	void				*next;
+}						t_pt;
+
 typedef struct			s_player
 {
 	float				x;
@@ -67,6 +77,7 @@ typedef struct			s_player
 	float				*dis;
 	int					temp_x;
 	int					temp_y;
+	t_pt				pt;
 	t_sprite_list		*sp;
 }						t_player;
 
@@ -136,6 +147,7 @@ void					green_ray(t_data_cub *data);
 void					save(t_data_cub *data);
 float					trgb_def_wall(float a);
 void					put_sprite(t_data_cub *data);
-void					sort_sprite(t_data_cub *data);
+void					sort_sprite(t_data_cub *data, t_pt *pt);
+t_sprite_list			*record_sprite(t_sprite_list *sp, t_sprite_list *sp2);
 
 #endif

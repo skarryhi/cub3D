@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/31 12:37:06 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/09 09:54:44 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/09 09:58:44 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ float		ray_growth(t_data_cub *data, float *c, int i, float a)
 		new_sprite(&*data, a, i);
 		data->plr.temp_x = (int)data->plr.mx;
 		data->plr.temp_y = (int)data->plr.my;
-		while (data->plr.temp_x == (int)data->plr.mx && data->plr.temp_y == (int)data->plr.my)
+		while (data->plr.temp_x == (int)data->plr.mx &&
+							data->plr.temp_y == (int)data->plr.my)
 		{
 			data->plr.mx = data->plr.x + *c * cos(a);
 			data->plr.my = data->plr.y + *c * sin(a);
