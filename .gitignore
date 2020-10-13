@@ -1,5 +1,5 @@
 *.o
-./cub/*.o
-./libft/*.o
-./libft/libft.a
+cub/*.o
+libft/*.o
+libft/libft.a
 cub3D
