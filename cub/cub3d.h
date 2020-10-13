@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 15:52:18 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/09 12:45:02 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/13 11:42:10 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,7 @@ float					trgb_def_wall(float a);
 void					put_sprite(t_data_cub *data);
 void					sort_sprite(t_data_cub *data, t_pt *pt);
 t_sprite_list			*record_sprite(t_sprite_list *sp, t_sprite_list *sp2);
+char					*ft_record(char *s, int x);
+int						size_x(t_data_cub *data, char **s);
 
 #endif

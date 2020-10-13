@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:10:49 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/09 13:31:15 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/13 11:44:10 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,33 @@ void		check_ex_str(char **s, char *s2)
 		*s = s2;
 	else
 		ft_exit("Invalid map");
+}
+
+int			map_type(char **s, int y, t_data_cub *data)
+{
+	int	i;
+	int	j;
+	int x;
+
+	i = 0;
+	j = y;
+	x = size_x(&*data, s);
+	data->plr.map_x = x;
+	while (s[j++])
+		i++;
+	if (!(data->map = (char**)malloc(sizeof(char*) * (i + 1))))
+		ft_exit("Error of malloc");
+	data->map[i] = NULL;
+	i = 0;
+	while (s[y])
+	{
+		if (!s[y + 1] && s[y][0])
+			ft_exit("Invalid map");
+		data->map[i] = s[y++];
+		if (ft_strlen(data->map[i]) < (size_t)x)
+			data->map[i] = ft_record(data->map[i], x);
+		i++;
+	}
+	check_valid_map(&*data);
+	return (y);
 }

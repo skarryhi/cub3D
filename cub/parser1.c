@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 15:17:32 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/09 09:40:52 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/13 11:43:16 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,27 @@ int		r_type(char *s, int *r1, int *r2)
 	return (0);
 }
 
+char	*colour_type_check(char *s, int *r, int f)
+{
+	while (*s == ' ')
+		s++;
+	if (ft_isdigit(*s))
+		*r = ft_atoi(s);
+	while (ft_isdigit(*s))
+		s++;
+	if (f)
+		if (*s == ',')
+			s++;
+	return (s);
+}
+
 int		colour_type(char *s, t_colour *l)
 {
 	if (l->r == -1 && l->g == -1 && l->b == -1)
 	{
-		l->r = ft_atoi(s);
-		while (ft_isdigit(*s) || *s == ' ')
-			s++;
-		s++;
-		l->g = ft_atoi(s);
-		while (ft_isdigit(*s) || *s == ' ')
-			s++;
-		s++;
-		l->b = ft_atoi(s);
-		while (*s == ' ')
-			s++;
-		while (ft_isdigit(*s))
-			s++;
+		s = colour_type_check(s, &l->r, 1);
+		s = colour_type_check(s, &l->g, 1);
+		s = colour_type_check(s, &l->b, 0);
 		if (*s)
 			ft_exit("Invalid map");
 	}
@@ -114,33 +118,4 @@ char	*ft_record(char *s, int x)
 	}
 	free(s);
 	return (re);
-}
-
-int		map_type(char **s, int y, t_data_cub *data)
-{
-	int	i;
-	int	j;
-	int x;
-
-	i = 0;
-	j = y;
-	x = size_x(&*data, s);
-	data->plr.map_x = x;
-	while (s[j++])
-		i++;
-	if (!(data->map = (char**)malloc(sizeof(char*) * (i + 1))))
-		ft_exit("Error of malloc");
-	data->map[i] = NULL;
-	i = 0;
-	while (s[y])
-	{
-		if (!s[y + 1] && s[y][0])
-			ft_exit("Invalid map");
-		data->map[i] = s[y++];
-		if (ft_strlen(data->map[i]) < (size_t)x)
-			data->map[i] = ft_record(data->map[i], x);
-		i++;
-	}
-	check_valid_map(&*data);
-	return (y);
 }

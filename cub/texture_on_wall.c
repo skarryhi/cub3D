@@ -6,7 +6,7 @@
 /*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/03 17:47:43 by skarry            #+#    #+#             */
-/*   Updated: 2020/10/13 11:08:34 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/13 11:43:45 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int			trgb_wall(t_data_cub *data, float y)
 		data->map[(int)(data->plr.my + 0.005)][(int)data->plr.mx] == '1')
 		return (pix_for_w_e(&*data, &data->txt.w, y, 'w'));
 	else if (data->map[(int)data->plr.my][(int)(data->plr.mx - 0.005)] == '1' &&
-		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.005)] == '1'&&
+		data->map[(int)data->plr.my][(int)(data->plr.mx + 0.005)] == '1' &&
 		data->map[(int)(data->plr.my + 0.005)][(int)data->plr.mx] == '1')
 		return (pix_for_s_n(&*data, &data->txt.s, y, 's'));
-	else if (data->map[(int)data->plr.my][(int)(data->plr.mx - 0.005)] == '1'&&
+	else if (data->map[(int)data->plr.my][(int)(data->plr.mx - 0.005)] == '1' &&
 		data->map[(int)(data->plr.my - 0.005)][(int)data->plr.mx] == '1' &&
 		data->map[(int)(data->plr.my + 0.005)][(int)data->plr.mx] == '1')
 		return (pix_for_w_e(&*data, &data->txt.e, y, 'e'));

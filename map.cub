@@ -2,9 +2,9 @@
 R     1280    920
 
 NO ./texture/111.xpm
-SO ./texture/111.xpm
-WE ./texture/111.xpm
-EA ./texture/111.xpm
+SO ./texture/222.xpm
+WE ./texture/333.xpm
+EA ./texture/444.xpm
 S ./texture/555.xpm
 
 
