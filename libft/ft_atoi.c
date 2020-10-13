@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skarry <skarry@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: skarry <skarry@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/30 11:06:02 by skarry            #+#    #+#             */
-/*   Updated: 2020/05/17 18:24:39 by skarry           ###   ########.fr       */
+/*   Updated: 2020/10/13 11:56:38 by skarry           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@ int		ft_atoi(const char *str)
 			i = -1;
 		str++;
 	}
-	while (ft_isdigit((int)*str))
+	while (ft_isdigit((int)*str) && res < 2147483648)
 	{
 		res = res * 10 + (long long int)(*str - '0');
 		str++;
 	}
+	if (res > 2147483648 && i == -1)
+		res = 2147483648;
+	if (res > 2147483647 && i == 1)
+		res = 2147483647;
 	return ((int)(res * i));
 }
